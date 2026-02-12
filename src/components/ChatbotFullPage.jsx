@@ -81,10 +81,7 @@ export function ChatbotFullPage({ config = {} }) {
     scrollToBottom();
   }, [messages, isLoading]);
 
-  // Track session on first load
-  useEffect(() => {
-    trackSession();
-  }, [userIP, chatbotId]);
+  // Session will be created on first message send, not on page load
 
   const initializeChatbot = async () => {
     try {
@@ -199,6 +196,20 @@ export function ChatbotFullPage({ config = {} }) {
 
     setShowStarterQuestions(false);
 
+    // Create session on first message if not already created
+    let sessionId = userChatSessionId;
+    if (!userChatSessionId && userIP && chatbotId) {
+      try {
+        sessionId = await insertUserChatSession(userIP, chatbotId);
+        setUserChatSessionId(sessionId);
+        setSessionTracked(true);
+        console.log('Session created on first message:', sessionId);
+      } catch (error) {
+        console.error('Failed to create session:', error);
+        return;
+      }
+    }
+
     const userMessage = {
       id: Date.now(),
       text: message,
@@ -212,7 +223,7 @@ export function ChatbotFullPage({ config = {} }) {
     try {
       const response = await fetchImprovedChatResponse(
         message,
-        userChatSessionId,
+        sessionId,
         chatbotId,
         chatConfig.apiBaseUrl
       );
@@ -249,6 +260,20 @@ export function ChatbotFullPage({ config = {} }) {
 
     setShowStarterQuestions(false);
 
+    // Create session on first message if not already created
+    let sessionId = userChatSessionId;
+    if (!userChatSessionId && userIP && chatbotId) {
+      try {
+        sessionId = await insertUserChatSession(userIP, chatbotId);
+        setUserChatSessionId(sessionId);
+        setSessionTracked(true);
+        console.log('Session created on first message:', sessionId);
+      } catch (error) {
+        console.error('Failed to create session:', error);
+        return;
+      }
+    }
+
     const userMessage = {
       id: Date.now(),
       text: questionText,
@@ -278,7 +303,7 @@ export function ChatbotFullPage({ config = {} }) {
     try {
       const response = await fetchImprovedChatResponse(
         questionText,
-        userChatSessionId,
+        sessionId,
         chatbotId,
         chatConfig.apiBaseUrl
       );
@@ -398,7 +423,7 @@ export function ChatbotFullPage({ config = {} }) {
   const latestBotMessageIndex = getLatestBotMessageIndex();
 
   return (
-    <div className="w-full h-screen flex flex-col bg-white">
+    <div className="w-full flex flex-col bg-white" style={{ height: '100dvh' }}>
       {/* Header */}
       <ChatHeader
         clinicName={truncateText(chatConfig.clinicName, headerMaxLength)}

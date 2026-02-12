@@ -4,7 +4,7 @@ import './index.css';
 
 function App() {
   return (
-    <div className="w-full h-screen bg-white">
+    <div className="w-screen" style={{ height: '100dvh' }}>
       <ChatbotFullPage />
     </div>
   );
