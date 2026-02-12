@@ -25,9 +25,9 @@ const ChatInput = forwardRef(({ onSendMessage, isLoading }, ref) => {
   }
 
   return (
-    <div className="w-screen bg-white border-t border-secondary-100 pb-safe-bottom flex-shrink-0">
-      <form onSubmit={handleSubmit} className="w-full max-w-2xl mx-auto px-4 py-3 md:px-6 md:py-4">
-        <div className={`flex items-end gap-2 md:gap-3 rounded-xl transition-all duration-200 ${
+    <div className="w-full bg-white border-t border-secondary-100 pb-safe-bottom flex-shrink-0 shadow-lg">
+      <form onSubmit={handleSubmit} className="w-full px-4 py-3 md:px-6 md:py-4">
+        <div className={`flex items-center gap-2 md:gap-3 rounded-xl transition-all duration-200 ${
           isFocused
             ? 'ring-2 ring-primary-500 ring-offset-0'
             : 'ring-1 ring-secondary-200'
@@ -41,9 +41,9 @@ const ChatInput = forwardRef(({ onSendMessage, isLoading }, ref) => {
             onKeyDown={handleKeyDown}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
-            placeholder="Type a message..."
+            placeholder="Type here..."
             disabled={isLoading}
-            className="flex-1 bg-transparent border-0 outline-none text-sm md:text-base text-secondary-900 placeholder-secondary-400 px-2 py-2 md:px-3 md:py-3 focus:ring-0 min-h-touch md:min-h-auto disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex-1 bg-transparent border-0 outline-none text-sm md:text-base text-secondary-900 placeholder-secondary-400 px-2 py-2 md:px-3 md:py-3 focus:ring-0 disabled:opacity-50 disabled:cursor-not-allowed"
             maxLength={500}
             autoCorrect="off"
             spellCheck="true"
@@ -53,7 +53,7 @@ const ChatInput = forwardRef(({ onSendMessage, isLoading }, ref) => {
           <button
             type="submit"
             disabled={!input.trim() || isLoading}
-            className="flex-shrink-0 p-2 md:p-2.5 rounded-lg bg-primary-600 hover:bg-primary-700 disabled:bg-secondary-300 text-white transition-all duration-200 touch-target focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 active:scale-95 disabled:cursor-not-allowed flex items-center justify-center"
+            className="p-2 md:p-2.5 rounded-lg bg-primary-600 hover:bg-primary-700 disabled:bg-secondary-300 text-white transition-all duration-200 touch-target focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 active:scale-95 disabled:cursor-not-allowed flex items-center justify-center flex-shrink-0 h-10 w-10 md:h-11 md:w-11"
             aria-label="Send message"
             title="Send"
           >
@@ -62,10 +62,11 @@ const ChatInput = forwardRef(({ onSendMessage, isLoading }, ref) => {
         </div>
 
         {/* Character count (optional) */}
-        <div className="text-xs text-secondary-400 mt-2 px-2">
-          {input.length > 0 && `${input.length}/500`}
-          {isLoading && <span className="ml-2">Sending...</span>}
-        </div>
+        {input.length > 0 && (
+          <div className="text-xs text-secondary-400 mt-2 px-2">
+            {input.length}/500
+          </div>
+        )}
       </form>
     </div>
   )
