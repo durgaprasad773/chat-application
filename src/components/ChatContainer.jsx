@@ -13,9 +13,9 @@ export default function ChatContainer({ messages, isLoading, error }) {
   return (
     <div
       ref={containerRef}
-      className="flex-1 overflow-y-auto overscroll-contain bg-primary-50 scrollbar touch-pan-y"
+      className="w-full h-full overflow-y-auto overscroll-contain bg-primary-50 scrollbar"
     >
-      <div className="w-full h-full max-w-2xl mx-auto px-4 py-4 md:px-6 md:py-6 flex flex-col">
+      <div className="w-full px-4 py-4 md:px-6 md:py-6">
         {/* Error Banner */}
         {error && (
           <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
@@ -26,7 +26,7 @@ export default function ChatContainer({ messages, isLoading, error }) {
         )}
 
         {/* Messages */}
-        <div className="space-y-4 md:space-y-5 flex-1">
+        <div className="space-y-4 md:space-y-5">
           {messages.map((message) => (
             <ChatMessage
               key={message.id}

@@ -108,8 +108,10 @@ export default function App() {
       {/* Header */}
       <Header onRestart={handleRestart} />
 
-      {/* Chat Container - Only this scrolls */}
-      <ChatContainer messages={messages} isLoading={isLoading} error={error} />
+      {/* Chat Container - Takes 80vh */}
+      <div className="h-[calc(100vh-280px)] md:h-[calc(100vh-320px)] overflow-hidden">
+        <ChatContainer messages={messages} isLoading={isLoading} error={error} />
+      </div>
 
       {/* Input Area - Fixed at bottom */}
       <ChatInput onSendMessage={handleSendMessage} inputRef={inputRef} isLoading={isLoading} />
