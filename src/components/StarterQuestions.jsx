@@ -45,9 +45,6 @@ export function StarterQuestions({
           </button>
         )}
       </div>
-      <div className="bg-yellow-50 border border-yellow-300 rounded-lg px-3 py-2 text-xs text-yellow-900 text-center">
-        I'm an AI assistant. Please consult a healthcare professional for medical advice.
-      </div>
     </div>
   );
 }
