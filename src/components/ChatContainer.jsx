@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import ChatMessage from './ChatMessage'
 
-export default function ChatContainer({ messages, isLoading }) {
+export default function ChatContainer({ messages, isLoading, error }) {
   const containerRef = useRef(null)
   const endRef = useRef(null)
 
@@ -16,6 +16,15 @@ export default function ChatContainer({ messages, isLoading }) {
       className="flex-1 overflow-y-auto overscroll-contain bg-primary-50 scrollbar"
     >
       <div className="w-full max-w-2xl mx-auto px-4 py-4 md:px-6 md:py-6">
+        {/* Error Banner */}
+        {error && (
+          <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+            <p className="text-sm text-red-600">
+              <span className="font-semibold">Error:</span> {error}
+            </p>
+          </div>
+        )}
+
         {/* Messages */}
         <div className="space-y-4 md:space-y-5">
           {messages.map((message) => (
@@ -24,6 +33,8 @@ export default function ChatContainer({ messages, isLoading }) {
               text={message.text}
               sender={message.sender}
               timestamp={message.timestamp}
+              isError={message.isError}
+              metadata={message.metadata}
             />
           ))}
 

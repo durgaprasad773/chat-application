@@ -2,6 +2,8 @@ import { useState, useRef, useEffect } from 'react'
 import Header from './components/Header'
 import ChatContainer from './components/ChatContainer'
 import ChatInput from './components/ChatInput'
+import chatService from './services/chatService'
+import { getOrCreateSessionId, clearSessionId } from './config/api'
 
 export default function App() {
   const [messages, setMessages] = useState([
@@ -13,10 +15,18 @@ export default function App() {
     },
   ])
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const [sessionId, setSessionId] = useState('')
   const inputRef = useRef(null)
 
-  const handleSendMessage = (text) => {
-    if (!text.trim()) return
+  // Initialize session on component mount
+  useEffect(() => {
+    const id = getOrCreateSessionId()
+    setSessionId(id)
+  }, [])
+
+  const handleSendMessage = async (text) => {
+    if (!text.trim() || !sessionId) return
 
     // Add user message
     const userMessage = {
@@ -28,37 +38,55 @@ export default function App() {
 
     setMessages((prev) => [...prev, userMessage])
     setIsLoading(true)
+    setError(null)
 
-    // Simulate AI response delay
-    setTimeout(() => {
+    try {
+      // Call the AI API
+      const response = await chatService.sendMessage(text.trim(), sessionId)
+
       const aiMessage = {
         id: messages.length + 2,
-        text: getAIResponse(text),
+        text: response.message,
+        sender: 'ai',
+        timestamp: new Date(response.timestamp || new Date()),
+        metadata: {
+          intent: response.intent,
+          topic: response.topic,
+          contextSources: response.context_sources,
+          conversationStage: response.conversation_stage,
+          followUpQuestion: response.follow_up_question,
+          suggestedTopics: response.suggested_topics,
+          userInterests: response.user_interests,
+        },
+      }
+
+      setMessages((prev) => [...prev, aiMessage])
+    } catch (err) {
+      console.error('Message sending error:', err)
+      setError(err.message)
+
+      // Add error message to chat
+      const errorMessage = {
+        id: messages.length + 2,
+        text: `Sorry, there was an error: ${err.message}. Please try again.`,
         sender: 'ai',
         timestamp: new Date(),
+        isError: true,
       }
-      setMessages((prev) => [...prev, aiMessage])
+
+      setMessages((prev) => [...prev, errorMessage])
+    } finally {
       setIsLoading(false)
-    }, 800)
-  }
-
-  const getAIResponse = (userText) => {
-    const responses = {
-      hello: "Hello! It's great to chat with you. What would you like to know?",
-      help: "I'm here to assist you! Feel free to ask me anything.",
-      how: "I'm doing well, thanks for asking! How can I help you today?",
-      what: "I'm an AI Assistant designed to help answer your questions and provide support.",
-      default: "That's an interesting question! I'm learning more about it. How can I assist you further?",
     }
-
-    const lowerText = userText.toLowerCase()
-    for (const [key, value] of Object.entries(responses)) {
-      if (lowerText.includes(key)) return value
-    }
-    return responses.default
   }
 
   const handleRestart = () => {
+    // Clear session and create new one
+    clearSessionId()
+    const newSessionId = getOrCreateSessionId()
+    setSessionId(newSessionId)
+
+    // Reset messages
     setMessages([
       {
         id: 1,
@@ -67,6 +95,9 @@ export default function App() {
         timestamp: new Date(),
       },
     ])
+
+    setError(null)
+
     if (inputRef.current) {
       inputRef.current.focus()
     }
@@ -78,10 +109,10 @@ export default function App() {
       <Header onRestart={handleRestart} />
 
       {/* Chat Container */}
-      <ChatContainer messages={messages} isLoading={isLoading} />
+      <ChatContainer messages={messages} isLoading={isLoading} error={error} />
 
       {/* Input Area */}
-      <ChatInput onSendMessage={handleSendMessage} inputRef={inputRef} />
+      <ChatInput onSendMessage={handleSendMessage} inputRef={inputRef} isLoading={isLoading} />
     </div>
   )
 }
