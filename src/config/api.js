@@ -1,6 +1,10 @@
 // API Configuration
+// For local development, use the proxied endpoint (via Vite dev server)
+// For production, use the full absolute URL
 export const API_CONFIG = {
-  BASE_URL: 'https://your-production-api-url.com', // Replace with your actual API URL
+  BASE_URL: process.env.NODE_ENV === 'production' 
+    ? 'https://neurax-python-be-emhfejathhhpe6h3.uksouth-01.azurewebsites.net'
+    : '', // Use relative path for dev proxy (localhost:5173 will handle routing)
   WIDGET_KEY: 'bb99a847-2437-4d34-9f82-6485ffde3265',
   ENDPOINTS: {
     CHAT: '/nexus/ai/widget/chat',

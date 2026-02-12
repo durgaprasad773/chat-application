@@ -6,5 +6,12 @@ export default defineConfig({
   server: {
     port: 5173,
     open: true,
+    proxy: {
+      '/nexus': {
+        target: 'https://neurax-python-be-emhfejathhhpe6h3.uksouth-01.azurewebsites.net',
+        changeOrigin: true,
+        rewrite: (path) => path,
+      },
+    },
   },
 })

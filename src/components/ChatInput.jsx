@@ -10,7 +10,9 @@ const ChatInput = forwardRef(({ onSendMessage, isLoading }, ref) => {
     if (input.trim() && !isLoading) {
       onSendMessage(input)
       setInput('')
-      ref.current?.focus()
+      if (ref?.current) {
+        ref.current.focus()
+      }
     }
   }
 

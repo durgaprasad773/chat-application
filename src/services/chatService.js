@@ -2,8 +2,8 @@ import { API_CONFIG } from '../config/api'
 
 class ChatService {
   constructor() {
-    this.baseURL = API_CONFIG.BASE_URL
-    this.widgetKey = API_CONFIG.WIDGET_KEY
+    this.apiBaseURL = API_CONFIG.BASE_URL
+    this.chatbotId = API_CONFIG.WIDGET_KEY
   }
 
   /**
@@ -15,7 +15,7 @@ class ChatService {
    */
   async sendMessage(message, sessionId, indexName = 'veera') {
     try {
-      const payload = {
+      const requestPayload = {
         message: message,
         session_id: sessionId,
         index_name: indexName,
@@ -23,17 +23,23 @@ class ChatService {
 
       const headers = {
         'Content-Type': 'application/json',
+        'accept': 'application/json',
       }
 
-      // Add widget key if configured
-      if (this.widgetKey && this.widgetKey !== 'your-widget-key') {
-        headers['x-widget-key'] = this.widgetKey
+      // Add x-widget-key header if chatbotId is provided
+      if (this.chatbotId) {
+        headers['x-widget-key'] = this.chatbotId
       }
 
-      const response = await fetch(`${this.baseURL}${API_CONFIG.ENDPOINTS.CHAT}`, {
+      // Build the full URL - for dev use relative path (proxy), for prod use absolute URL
+      const url = this.apiBaseURL 
+        ? `${this.apiBaseURL}${API_CONFIG.ENDPOINTS.CHAT}`
+        : API_CONFIG.ENDPOINTS.CHAT
+
+      const response = await fetch(url, {
         method: 'POST',
         headers: headers,
-        body: JSON.stringify(payload),
+        body: JSON.stringify(requestPayload),
       })
 
       if (!response.ok) {
@@ -41,14 +47,14 @@ class ChatService {
           const error = await response.json()
           throw new Error(`Validation Error: ${JSON.stringify(error.detail)}`)
         }
-        throw new Error(`API Error: ${response.statusText}`)
+        throw new Error(`HTTP error! status: ${response.status}`)
       }
 
       const data = await response.json()
       return data
     } catch (error) {
-      console.error('Chat API Error:', error)
-      throw error
+      console.error('Error fetching widget chat response:', error)
+      throw new Error('Failed to get AI response. Please try again.')
     }
   }
 }
