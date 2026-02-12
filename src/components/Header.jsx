@@ -2,7 +2,7 @@ import { RotateCcw } from 'lucide-react'
 
 export default function Header({ onRestart }) {
   return (
-    <header className="sticky top-0 z-40 w-full bg-white border-b border-secondary-100 pt-safe-top">
+    <header className="sticky top-0 z-40 w-screen bg-white border-b border-secondary-100 pt-safe-top flex-shrink-0 shadow-sm">
       <div className="flex items-center justify-between px-4 py-4 md:px-6 md:py-5">
         {/* Left: Profile Section */}
         <div className="flex items-center gap-3 flex-1 min-w-0">

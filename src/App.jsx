@@ -104,14 +104,14 @@ export default function App() {
   }
 
   return (
-    <div className="flex flex-col h-screen w-full bg-primary-50 overflow-hidden">
+    <div className="flex flex-col h-screen w-screen bg-primary-50 overflow-hidden fixed inset-0">
       {/* Header */}
       <Header onRestart={handleRestart} />
 
-      {/* Chat Container */}
+      {/* Chat Container - Only this scrolls */}
       <ChatContainer messages={messages} isLoading={isLoading} error={error} />
 
-      {/* Input Area */}
+      {/* Input Area - Fixed at bottom */}
       <ChatInput onSendMessage={handleSendMessage} inputRef={inputRef} isLoading={isLoading} />
     </div>
   )

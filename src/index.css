@@ -9,13 +9,25 @@
 html, body, #root {
   height: 100%;
   width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  padding-env: safe-area-inset-bottom;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+}
+
+/* Prevent body scroll - only allow chat container scroll */
+body, html {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
 /* Custom scrollbar styling */
@@ -62,3 +74,28 @@ textarea {
   outline: 2px solid #0ea5e9;
   outline-offset: 2px;
 }
+
+/* Native app-like styling */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
+}
+
+/* Prevent viewport zoom on input focus (iOS) */
+input, textarea, select {
+  font-size: 16px !important;
+}
+
+/* Smooth transitions */
+* {
+  -webkit-transition: -webkit-transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
+}
+
+button, a {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
