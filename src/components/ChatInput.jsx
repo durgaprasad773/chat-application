@@ -1,77 +1,71 @@
-import { useState, forwardRef } from 'react'
-import { Send } from 'lucide-react'
+import React, { useRef, useEffect, useState } from 'react';
+import { Send } from 'lucide-react';
 
-const ChatInput = forwardRef(({ onSendMessage, isLoading }, ref) => {
-  const [input, setInput] = useState('')
-  const [isFocused, setIsFocused] = useState(false)
+export function ChatInput({
+  disabled,
+  onSendMessage,
+  brandColour
+}) {
+  const [inputValue, setInputValue] = useState('');
+  const [textareaHeight, setTextareaHeight] = useState('auto');
+  const textareaRef = useRef(null);
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    if (input.trim() && !isLoading) {
-      onSendMessage(input)
-      setInput('')
-      if (ref?.current) {
-        ref.current.focus()
+  const handleInputChange = (e) => {
+    const textarea = e.target;
+    setInputValue(textarea.value);
+
+    // Auto-resize textarea
+    textarea.style.height = 'auto';
+    textarea.style.height = Math.min(textarea.scrollHeight, 150) + 'px';
+  };
+
+  const handleSend = () => {
+    if (inputValue.trim() && !disabled) {
+      onSendMessage(inputValue);
+      setInputValue('');
+      if (textareaRef.current) {
+        textareaRef.current.style.height = 'auto';
       }
     }
-  }
+  };
 
-  const handleKeyDown = (e) => {
-    // Send on Enter (not Shift+Enter)
+  const handleKeyPress = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault()
-      handleSubmit(e)
+      e.preventDefault();
+      handleSend();
     }
-  }
+  };
 
   return (
-    <div className="w-full bg-white border-t border-secondary-100 pb-safe-bottom flex-shrink-0 shadow-lg">
-      <form onSubmit={handleSubmit} className="w-full px-4 py-3 md:px-6 md:py-4">
-        <div className={`flex items-center gap-2 md:gap-3 rounded-xl transition-all duration-200 ${
-          isFocused
-            ? 'ring-2 ring-primary-500 ring-offset-0'
-            : 'ring-1 ring-secondary-200'
-        } bg-secondary-50 p-2 md:p-3`}>
-          {/* Input Field */}
-          <input
-            ref={ref}
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            onFocus={() => setIsFocused(true)}
-            onBlur={() => setIsFocused(false)}
-            placeholder="Type here..."
-            disabled={isLoading}
-            className="flex-1 bg-transparent border-0 outline-none text-sm md:text-base text-secondary-900 placeholder-secondary-400 px-2 py-2 md:px-3 md:py-3 focus:ring-0 disabled:opacity-50 disabled:cursor-not-allowed"
-            maxLength={500}
-            autoCorrect="off"
-            spellCheck="true"
-          />
-
-          {/* Send Button */}
-          <button
-            type="submit"
-            disabled={!input.trim() || isLoading}
-            className="p-2 md:p-2.5 rounded-lg bg-primary-600 hover:bg-primary-700 disabled:bg-secondary-300 text-white transition-all duration-200 touch-target focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 active:scale-95 disabled:cursor-not-allowed flex items-center justify-center flex-shrink-0 h-10 w-10 md:h-11 md:w-11"
-            aria-label="Send message"
-            title="Send"
-          >
-            <Send size={20} strokeWidth={2.5} />
-          </button>
-        </div>
-
-        {/* Character count (optional) */}
-        {input.length > 0 && (
-          <div className="text-xs text-secondary-400 mt-2 px-2">
-            {input.length}/500
-          </div>
-        )}
-      </form>
+    <div className="px-5 py-3 border-t border-gray-200 bg-white">
+      <div className="flex gap-3 items-flex-end">
+        <textarea
+          ref={textareaRef}
+          value={inputValue}
+          onChange={handleInputChange}
+          onKeyPress={handleKeyPress}
+          placeholder="Type your question..."
+          disabled={disabled}
+          className="flex-1 px-4 py-3 border border-gray-200 rounded-2xl resize-none focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-200 max-h-24 overflow-y-auto bg-white"
+          style={{
+            fontFamily: 'inherit',
+            fontSize: '0.875rem',
+            lineHeight: '1.6',
+            minHeight: '1.5rem'
+          }}
+          rows="1"
+        />
+        <button
+          onClick={handleSend}
+          disabled={!inputValue.trim() || disabled}
+          style={{ backgroundColor: brandColour || '#667eea' }}
+          className="flex-shrink-0 w-11 h-11 rounded-full text-white flex items-center justify-center hover:opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed"
+          title="Send message"
+          aria-label="Send message"
+        >
+          <Send size={20} />
+        </button>
+      </div>
     </div>
-  )
-})
-
-ChatInput.displayName = 'ChatInput'
-
-export default ChatInput
+  );
+}

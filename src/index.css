@@ -1,39 +1,73 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 * {
-  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
 }
 
-html, body, #root {
-  height: 100%;
-  width: 100%;
+html,
+body,
+#root {
   margin: 0;
   padding: 0;
-  overflow: hidden;
-}
-
-body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-}
-
-/* Prevent body scroll - only allow chat container scroll */
-body, html {
-  position: fixed;
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom scrollbar styling */
+/* Markdown rendering styles */
+.nexus-message-bubble a {
+  color: #0000ee;
+  text-decoration: underline;
+}
+
+.nexus-message-bubble strong {
+  font-weight: 600;
+}
+
+.nexus-message-bubble em {
+  font-style: italic;
+}
+
+.nexus-message-bubble code {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9em;
+  word-break: break-all;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.nexus-message-bubble ul,
+.nexus-message-bubble ol {
+  margin: 0.5rem 0;
+  padding-left: 1.25rem;
+}
+
+.nexus-message-bubble li {
+  margin: 0.125rem 0;
+}
+
+.nexus-message-bubble p {
+  margin: 0.5rem 0;
+}
+
+.nexus-message-bubble p:first-child {
+  margin-top: 0;
+}
+
+.nexus-message-bubble p:last-child {
+  margin-bottom: 0;
+}
+
+/* Scrollbar styling */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 0.375rem;
+  height: 0.375rem;
 }
 
 ::-webkit-scrollbar-track {
@@ -41,61 +75,38 @@ body, html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 3px;
+  background: #ddd;
+  border-radius: 0.1875rem;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #ccc;
 }
 
-/* Smooth scrolling behavior */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Input styling for mobile */
-input {
-  -webkit-appearance: none;
-  appearance: none;
-  border-radius: 0.375rem;
-}
-
-input[type="text"],
-input[type="search"],
-textarea {
-  -webkit-appearance: none;
-  appearance: none;
-  font-size: 16px; /* Prevents zoom on iOS */
-}
-
-/* Focus rings for accessibility */
-:focus-visible {
-  outline: 2px solid #0ea5e9;
-  outline-offset: 2px;
-}
-
-/* Native app-like styling */
-@supports (padding: max(0px)) {
-  body {
-    padding-left: max(0px, env(safe-area-inset-left));
-    padding-right: max(0px, env(safe-area-inset-right));
+/* Animation */
+@keyframes bounce {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
-/* Prevent viewport zoom on input focus (iOS) */
-input, textarea, select {
-  font-size: 16px !important;
+.animate-bounce {
+  animation: bounce 1.4s infinite ease-in-out;
 }
 
-/* Smooth transitions */
-* {
-  -webkit-transition: -webkit-transform 0.3s ease-out;
-  transition: transform 0.3s ease-out;
-}
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  body {
+    overflow: hidden;
+  }
 
-button, a {
-  -webkit-user-select: none;
-  user-select: none;
+  body.chat-open {
+    position: fixed;
+    width: 100%;
+  }
 }
-
