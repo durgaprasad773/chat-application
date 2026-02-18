@@ -5,7 +5,7 @@ export const API_URLS = {
 };
 
 // Direct widget ID (no API call needed)
-export const WIDGET_ID = 'bb99a847-2437-4d34-9f82-6485ffde3265';
+export const WIDGET_ID = 'ce0e9578-e1e3-4bee-a665-cbf12fc8db84';
 
 // Fetch chat response
 export async function fetchImprovedChatResponse(message, sessionId, chatbotId = null, apiBaseUrl = '') {

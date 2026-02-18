@@ -8,3 +8,4 @@ export { StarterQuestions } from './StarterQuestions';
 export { TypingIndicator } from './TypingIndicator';
 export { CTAButtons } from './CTAButtons';
 export { EmailFormModal } from './EmailFormModal';
+export { default as SplashScreen } from './SplashScreen';
