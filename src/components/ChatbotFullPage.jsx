@@ -423,7 +423,7 @@ export function ChatbotFullPage({ config = {} }) {
   const latestBotMessageIndex = getLatestBotMessageIndex();
 
   return (
-    <div className="w-full flex flex-col bg-white" style={{ height: '100dvh' }}>
+    <div className="w-full h-full flex flex-col bg-white" style={{ maxHeight: '100%' }}>
       {/* Header */}
       <ChatHeader
         clinicName={truncateText(chatConfig.clinicName, headerMaxLength)}

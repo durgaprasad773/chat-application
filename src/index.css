@@ -120,3 +120,11 @@ body {
     width: 100%;
   }
 }
+
+/* Desktop container styles */
+@media (min-width: 768px) {
+  .chatbot-container {
+    border-radius: 16px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+}
