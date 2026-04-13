@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from "@/components/ui/button";
 
 export function CTAButtons({
   bookNowShow,
@@ -22,43 +23,52 @@ export function CTAButtons({
     return null;
   }
 
+  const buttonStyle = {
+    borderColor: brandColour || '#0095da',
+    color: brandColour || '#0095da'
+  };
+
   return (
-    <div className="px-5 pb-2 overflow-x-auto flex gap-2">
+    <div className="bg-white px-6 py-4 flex flex-wrap gap-3">
       {bookNowShow && (
-        <button
+        <Button 
+          variant="outline" 
+          className="rounded-full border-[#0095da] text-[#0095da] hover:bg-blue-50 px-6 font-medium"
+          style={buttonStyle}
           onClick={onBookNow}
-          style={{ borderColor: brandColour || '#667eea', color: brandColour || '#667eea' }}
-          className="px-7 py-1 border-2 rounded-2xl text-sm font-medium whitespace-nowrap flex-shrink-0 hover:opacity-80 transition"
         >
           {bookNowText}
-        </button>
+        </Button>
       )}
       {ctaTwoShow && (
-        <button
+        <Button 
+          variant="outline" 
+          className="rounded-full border-[#0095da] text-[#0095da] hover:bg-blue-50 px-6 font-medium"
+          style={buttonStyle}
           onClick={onCTATwo}
-          style={{ borderColor: brandColour || '#667eea', color: brandColour || '#667eea' }}
-          className="px-7 py-1 border-2 rounded-2xl text-sm font-medium whitespace-nowrap flex-shrink-0 hover:opacity-80 transition"
         >
           {ctaTwoText}
-        </button>
+        </Button>
       )}
       {sendEmailShow && (
-        <button
+        <Button 
+          variant="outline" 
+          className="rounded-full border-[#0095da] text-[#0095da] hover:bg-blue-50 px-6 font-medium"
+          style={buttonStyle}
           onClick={onSendEmail}
-          style={{ borderColor: brandColour || '#667eea', color: brandColour || '#667eea' }}
-          className="px-7 py-1 border-2 rounded-2xl text-sm font-medium whitespace-nowrap flex-shrink-0 hover:opacity-80 transition"
         >
           {sendEmailText}
-        </button>
+        </Button>
       )}
       {ctaThreeShow && (
-        <button
+        <Button 
+          variant="outline" 
+          className="rounded-full border-[#0095da] text-[#0095da] hover:bg-blue-50 px-6 font-medium"
+          style={buttonStyle}
           onClick={onCTAThree}
-          style={{ borderColor: brandColour || '#667eea', color: brandColour || '#667eea' }}
-          className="px-7 py-1 border-2 rounded-2xl text-sm font-medium whitespace-nowrap flex-shrink-0 hover:opacity-80 transition"
         >
           {ctaThreeText}
-        </button>
+        </Button>
       )}
     </div>
   );

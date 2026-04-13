@@ -1,5 +1,7 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Send } from 'lucide-react';
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 export function ChatInput({
   disabled,
@@ -7,25 +9,16 @@ export function ChatInput({
   brandColour
 }) {
   const [inputValue, setInputValue] = useState('');
-  const [textareaHeight, setTextareaHeight] = useState('auto');
-  const textareaRef = useRef(null);
+  const inputRef = useRef(null);
 
   const handleInputChange = (e) => {
-    const textarea = e.target;
-    setInputValue(textarea.value);
-
-    // Auto-resize textarea
-    textarea.style.height = 'auto';
-    textarea.style.height = Math.min(textarea.scrollHeight, 150) + 'px';
+    setInputValue(e.target.value);
   };
 
   const handleSend = () => {
     if (inputValue.trim() && !disabled) {
       onSendMessage(inputValue);
       setInputValue('');
-      if (textareaRef.current) {
-        textareaRef.current.style.height = 'auto';
-      }
     }
   };
 
@@ -37,34 +30,39 @@ export function ChatInput({
   };
 
   return (
-    <div className="px-5 py-3 border-t border-gray-200 bg-white">
-      <div className="flex gap-3 items-flex-end">
-        <textarea
-          ref={textareaRef}
-          value={inputValue}
-          onChange={handleInputChange}
-          onKeyPress={handleKeyPress}
-          placeholder="Type your question..."
-          disabled={disabled}
-          className="flex-1 px-4 py-3 border border-gray-200 rounded-2xl resize-none focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-200 max-h-24 overflow-y-auto bg-white"
-          style={{
-            fontFamily: 'inherit',
-            fontSize: '0.875rem',
-            lineHeight: '1.6',
-            minHeight: '1.5rem'
-          }}
-          rows="1"
-        />
-        <button
-          onClick={handleSend}
-          disabled={!inputValue.trim() || disabled}
-          style={{ backgroundColor: brandColour || '#667eea' }}
-          className="flex-shrink-0 w-11 h-11 rounded-full text-white flex items-center justify-center hover:opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed"
-          title="Send message"
-          aria-label="Send message"
-        >
-          <Send size={20} />
-        </button>
+    <div className="bg-white p-4 border-t border-slate-100">
+      <div className="flex gap-3 mb-4">
+        <div className="relative flex-1">
+          <Input 
+            ref={inputRef}
+            placeholder="Type your question..." 
+            className="rounded-full bg-slate-50 border-slate-200 pr-12 h-12 focus-visible:ring-[#0095da] focus-visible:ring-offset-0"
+            style={{
+              '--color-ring': brandColour || '#0095da'
+            }}
+            value={inputValue}
+            onChange={handleInputChange}
+            onKeyPress={handleKeyPress}
+            disabled={disabled}
+          />
+          <Button 
+            size="icon" 
+            className="absolute right-1 top-1 rounded-full text-white hover:bg-blue-600 h-10 w-10 transition-all"
+            style={{ backgroundColor: brandColour || '#0095da' }}
+            onClick={handleSend}
+            disabled={!inputValue.trim() || disabled}
+          >
+            <Send size={18} />
+          </Button>
+        </div>
+      </div>
+      <div className="text-center space-y-1">
+        <p className="text-[10px] text-slate-400 uppercase tracking-widest font-bold">
+          Educational information only. Not a substitute for professional medical advice.
+        </p>
+        <p className="text-[10px] text-slate-400">
+          Powered by <span className="font-bold text-slate-600">NeurascaleX</span>
+        </p>
       </div>
     </div>
   );

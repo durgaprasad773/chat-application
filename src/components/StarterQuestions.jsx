@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from "motion/react";
 
 export function StarterQuestions({
   questions,
@@ -11,40 +12,27 @@ export function StarterQuestions({
 
   if (!hasQuestions) return null;
 
+  const questionsList = [
+    { q: questions.q1, a: questions.a1 },
+    { q: questions.q2, a: questions.a2 },
+    { q: questions.q3, a: questions.a3 }
+  ].filter(item => item.q);
+
   return (
-    <div className="px-4 my-3 flex flex-col items-end gap-2">
-      <div className="text-xs font-medium text-gray-600 text-right">
-        Choose a topic to get started:
-      </div>
-      <div className="flex flex-col gap-2 items-end w-full">
-        {questions.q1 && (
-          <button
-            onClick={() => onSelectQuestion(questions.q1, questions.a1)}
-            disabled={isLoading}
-            className="px-3 py-2 bg-white border border-gray-300 rounded-2xl text-sm text-gray-700 hover:bg-gray-50 transition disabled:opacity-60 disabled:cursor-not-allowed text-right max-w-full break-words whitespace-normal"
-          >
-            {questions.q1}
-          </button>
-        )}
-        {questions.q2 && (
-          <button
-            onClick={() => onSelectQuestion(questions.q2, questions.a2)}
-            disabled={isLoading}
-            className="px-3 py-2 bg-white border border-gray-300 rounded-2xl text-sm text-gray-700 hover:bg-gray-50 transition disabled:opacity-60 disabled:cursor-not-allowed text-right max-w-full break-words whitespace-normal"
-          >
-            {questions.q2}
-          </button>
-        )}
-        {questions.q3 && (
-          <button
-            onClick={() => onSelectQuestion(questions.q3, questions.a3)}
-            disabled={isLoading}
-            className="px-3 py-2 bg-white border border-gray-300 rounded-2xl text-sm text-gray-700 hover:bg-gray-50 transition disabled:opacity-60 disabled:cursor-not-allowed text-right max-w-full break-words whitespace-normal"
-          >
-            {questions.q3}
-          </button>
-        )}
-      </div>
+    <div className="flex flex-col items-end space-y-3 mb-6">
+      <span className="text-xs font-medium text-slate-500 mb-1">Choose a topic to get started:</span>
+      {questionsList.map((item, i) => (
+        <motion.button
+          key={i}
+          whileHover={{ scale: 1.02, backgroundColor: "#f8fafc" }}
+          whileTap={{ scale: 0.98 }}
+          onClick={() => onSelectQuestion(item.q, item.a)}
+          disabled={isLoading}
+          className="bg-white border border-slate-200 text-slate-700 px-5 py-3 rounded-2xl rounded-tr-none shadow-sm hover:border-blue-300 hover:text-blue-600 transition-all text-right max-w-[85%] text-sm md:text-base disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {item.q}
+        </motion.button>
+      ))}
     </div>
   );
 }

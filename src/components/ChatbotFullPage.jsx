@@ -4,13 +4,11 @@ import { ChatInput } from './ChatInput';
 import { Message } from './Message';
 import { TypingIndicator } from './TypingIndicator';
 import { StarterQuestions } from './StarterQuestions';
-import { ChatFooter } from './ChatFooter';
 import { CTAButtons } from './CTAButtons';
 import { EmailFormModal } from './EmailFormModal';
 import {
   WIDGET_ID,
   fetchImprovedChatResponse,
-  clearImprovedChatSession,
   saveReaction,
   getClinicSettings,
   getStarterQuestions,
@@ -423,7 +421,7 @@ export function ChatbotFullPage({ config = {} }) {
   const latestBotMessageIndex = getLatestBotMessageIndex();
 
   return (
-    <div className="w-full h-full flex flex-col bg-white" style={{ maxHeight: '100%' }}>
+    <div className="w-full h-full flex flex-col bg-white" style={{ minHeight: '600px' }}>
       {/* Header */}
       <ChatHeader
         clinicName={truncateText(chatConfig.clinicName, headerMaxLength)}
@@ -434,7 +432,7 @@ export function ChatbotFullPage({ config = {} }) {
       />
 
       {/* Messages Area */}
-      <div className="flex-1 overflow-y-auto bg-gray-50 px-5 py-5">
+      <div className="flex-1 overflow-y-auto bg-white px-6 py-6" style={{ minHeight: '400px' }}>
         {messages.map((message, index) => (
           <Message
             key={message.id}
@@ -449,7 +447,7 @@ export function ChatbotFullPage({ config = {} }) {
 
         {isLoading && (
           <div className="flex justify-start mb-4">
-            <div className="bg-gray-100 border border-gray-200 px-4 py-3 rounded-2xl">
+            <div className="bg-slate-100 border border-slate-200 px-4 py-3 rounded-2xl rounded-tl-none shadow-sm">
               <TypingIndicator />
             </div>
           </div>
@@ -492,9 +490,6 @@ export function ChatbotFullPage({ config = {} }) {
         onSendMessage={handleSendMessage}
         brandColour={chatConfig.brandColour}
       />
-
-      {/* Footer */}
-      <ChatFooter />
 
       {/* Email Form Modal */}
       <EmailFormModal
