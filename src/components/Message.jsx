@@ -35,6 +35,21 @@ export function Message({
             className="leading-relaxed"
             dangerouslySetInnerHTML={{ __html: parseMarkdown(message.text) }}
           />
+          
+          {/* Action Button from API response */}
+          {!isUser && message.hasActionButton && message.actionButtonText && message.actionButtonUrl && (
+            <Button
+              variant="outline"
+              className="rounded-full border-[#0095da] text-[#0095da] hover:bg-blue-50 px-6 font-medium mt-3"
+              style={{
+                borderColor: brandColour || '#0095da',
+                color: brandColour || '#0095da'
+              }}
+              onClick={() => window.open(message.actionButtonUrl, '_blank', 'noopener,noreferrer')}
+            >
+              {message.actionButtonText}
+            </Button>
+          )}
         </motion.div>
 
         <div className="text-[10px] text-slate-400 mt-1 ml-1">

@@ -235,7 +235,10 @@ export function ChatbotFullPage({ config = {} }) {
         session_id: response.session_id || userChatSessionId,
         userReaction: null,
         followUpQuestion: response.follow_up_question,
-        suggestedTopics: response.suggested_topics
+        suggestedTopics: response.suggested_topics,
+        hasActionButton: response.has_action_button,
+        actionButtonText: response.action_button_text,
+        actionButtonUrl: response.action_button_url
       };
 
       setMessages(prev => [...prev, botMessage]);
