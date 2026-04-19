@@ -55,7 +55,7 @@ function App() {
           {/* Links */}
           <div className="flex flex-col gap-2 mb-6">
             <a 
-              className="flex items-center gap-3 p-3.5 px-4 rounded-[14px] border border-[#005B9A] bg-[#E8F2FB] no-underline"
+              className="flex items-center gap-3 p-3.5 px-4 rounded-[14px] border border-[#005B9A] bg-white hover:bg-[#E8F2FB] transition-colors no-underline"
               href="https://go.berkshirepainclinic.co.uk/dc-"
               target="_blank"
               rel="noopener noreferrer"
@@ -73,7 +73,7 @@ function App() {
             </a>
 
             <a 
-              className="flex items-center gap-3 p-3.5 px-4 rounded-[14px] border border-[#059669] bg-white no-underline"
+              className="flex items-center gap-3 p-3.5 px-4 rounded-[14px] border border-[#059669] bg-white hover:bg-[#ECFDF5] transition-colors no-underline"
               href="https://go.berkshirepainclinic.co.uk/from-hurting-to-healing-membership"
               target="_blank"
               rel="noopener noreferrer"
@@ -91,7 +91,7 @@ function App() {
             </a>
 
             <a 
-              className="flex items-center gap-3 p-3.5 px-4 rounded-[14px] border border-[#E2E8F0] bg-white no-underline"
+              className="flex items-center gap-3 p-3.5 px-4 rounded-[14px] border border-[#E2E8F0] bg-white hover:bg-[#F8FAFC] transition-colors no-underline"
               href="https://go.berkshirepainclinic.co.uk/guide-"
               target="_blank"
               rel="noopener noreferrer"
@@ -109,7 +109,7 @@ function App() {
             </a>
 
             <a 
-              className="flex items-center gap-3 p-3.5 px-4 rounded-[14px] border border-[#E2E8F0] bg-white no-underline"
+              className="flex items-center gap-3 p-3.5 px-4 rounded-[14px] border border-[#E2E8F0] bg-white hover:bg-[#F8FAFC] transition-colors no-underline"
               href="https://www.youtube.com/channel/UCzahshjoAKhIhQV9UW4xs4A"
               target="_blank"
               rel="noopener noreferrer"
@@ -127,7 +127,7 @@ function App() {
             </a>
 
             <a 
-              className="flex items-center gap-3 p-3.5 px-4 rounded-[14px] border border-[#E2E8F0] bg-white no-underline"
+              className="flex items-center gap-3 p-3.5 px-4 rounded-[14px] border border-[#E2E8F0] bg-white hover:bg-[#F8FAFC] transition-colors no-underline"
               href="https://www.berkshirepainclinic.co.uk/"
               target="_blank"
               rel="noopener noreferrer"
@@ -189,7 +189,7 @@ function App() {
               © Berkshire Pain Clinic · berkshirepainclinic.co.uk
             </div>
             <div className="text-[10px] text-[#94A3B8]">
-              AI page by <strong className="text-[#005B9A] font-semibold">NeuraScaleX</strong> · ask.berkshirepainclinic.co.uk
+              AI page by <a href="https://www.neurascalex.com/" target="_blank" rel="noopener noreferrer" className="no-underline hover:underline"><strong className="text-[#005B9A] font-semibold">NeuraScaleX</strong></a> · ask.berkshirepainclinic.co.uk
             </div>
           </div>
 

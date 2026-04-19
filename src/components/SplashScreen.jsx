@@ -63,24 +63,26 @@ const SplashScreen = ({ onComplete }) => {
           </defs>
 
           {/* Main text with animation */}
-          <text
-            x="50%"
-            y="50%"
-            dominantBaseline="middle"
-            textAnchor="middle"
-            fill="url(#textGradient)"
-            filter="url(#shadow)"
-            style={{
-              fontSize: '52px',
-              fontWeight: '900',
-              fontFamily: "'Bebas Neue', 'Impact', 'Arial Black', sans-serif",
-              letterSpacing: '4px',
-              textTransform: 'uppercase',
-            }}
-            className="logo-text"
-          >
-            NeurascaleX
-          </text>
+          <a href="https://www.neurascalex.com/" target="_blank" rel="noopener noreferrer" style={{ cursor: 'pointer' }}>
+            <text
+              x="50%"
+              y="50%"
+              dominantBaseline="middle"
+              textAnchor="middle"
+              fill="url(#textGradient)"
+              filter="url(#shadow)"
+              style={{
+                fontSize: '52px',
+                fontWeight: '900',
+                fontFamily: "'Bebas Neue', 'Impact', 'Arial Black', sans-serif",
+                letterSpacing: '4px',
+                textTransform: 'uppercase',
+              }}
+              className="logo-text"
+            >
+              NeurascaleX
+            </text>
+          </a>
 
           {/* Subtitle */}
           <text
