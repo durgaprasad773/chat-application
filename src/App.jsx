@@ -1,159 +1,199 @@
-import React, { useState } from 'react';
-import { motion } from "motion/react";
-import { Mountain, Info, Check } from "lucide-react";
+import React from 'react';
 import { ChatbotFullPage } from './components/ChatbotFullPage';
-import SplashScreen from './components/SplashScreen';
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import './index.css';
 
 function App() {
-  const [showSplash, setShowSplash] = useState(true);
-
-  const handleSplashComplete = () => {
-    setShowSplash(false);
-  };
-
   return (
     <>
-      {showSplash && <SplashScreen onComplete={handleSplashComplete} />}
       <div 
-        className="min-h-screen bg-[#f8fafc] font-sans text-slate-900 pb-20"
+        className="min-h-screen bg-[#F0F4F8] flex justify-center"
         style={{ 
-          opacity: showSplash ? 0 : 1,
-          transition: 'opacity 0.3s ease-in'
+          fontFamily: "'DM Sans', sans-serif"
         }}
       >
-        {/* Header */}
-        <header className="bg-white border-b border-slate-200 py-4 px-6 sticky top-0 z-50">
-          <div className="max-w-4xl mx-auto flex items-center gap-3">
-            <div className="w-10 h-10 bg-[#0095da] rounded-full flex items-center justify-center text-white shadow-sm">
-              <Mountain size={22} />
+        <div className="w-full max-w-[460px] px-4 py-8">
+          
+          {/* Identity Section */}
+          <div className="text-center mb-6">
+            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#005B9A] to-[#0891B2] flex items-center justify-center mx-auto mb-3.5 shadow-[0_0_0_3px_#fff,_0_0_0_5px_#E8F2FB,_0_4px_16px_rgba(0,91,154,.2)]">
+              <span className="text-[26px] font-bold text-white font-serif">DR</span>
             </div>
-            <h1 className="text-xl font-semibold tracking-tight text-slate-800">
+            <h1 className="font-serif text-2xl font-normal text-[#0F172A] mb-1">
               Berkshire Pain Clinic
             </h1>
+            <div className="text-[13px] text-[#475569] mb-2 leading-relaxed">
+              Prof. Dr Deepak Ravindran &amp; Team<br />
+              <span className="text-[#94A3B8]">Consultant Pain Medicine · Reading, Berkshire</span>
+            </div>
+            <div className="flex justify-center gap-1.5 flex-wrap">
+              <span className="text-[11px] px-2.5 py-1 rounded-full bg-[#E8F2FB] text-[#005B9A] font-medium">
+                Insured &amp; Self-pay
+              </span>
+              <span className="text-[11px] px-2.5 py-1 rounded-full bg-[#E8F2FB] text-[#005B9A] font-medium">
+                Holistic &amp; Integrative
+              </span>
+              <span className="text-[11px] px-2.5 py-1 rounded-full bg-[#E8F2FB] text-[#005B9A] font-medium">
+                Consultant-led
+              </span>
+            </div>
           </div>
-        </header>
 
-        <main className="max-w-4xl mx-auto px-6 pt-12 space-y-12">
-          {/* Hero Section */}
-          <section className="text-center space-y-4">
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900"
+          {/* Chat Widget */}
+          <div className="mb-5">
+            <ChatbotFullPage />
+          </div>
+
+          {/* Divider */}
+          <div className="flex items-center gap-2.5 mb-4">
+            <div className="flex-1 h-px bg-[#E2E8F0]"></div>
+            <span className="text-[11px] text-[#94A3B8] font-medium tracking-wider uppercase">
+              Quick links
+            </span>
+            <div className="flex-1 h-px bg-[#E2E8F0]"></div>
+          </div>
+
+          {/* Links */}
+          <div className="flex flex-col gap-2 mb-6">
+            <a 
+              className="flex items-center gap-3 p-3.5 px-4 rounded-[14px] border border-[#005B9A] bg-[#E8F2FB] no-underline"
+              href="https://go.berkshirepainclinic.co.uk/dc-"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              Find the right next step for your pain care
-            </motion.h2>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="text-lg text-slate-600 max-w-2xl mx-auto"
+              <span className="text-lg w-7 text-center flex-shrink-0">📅</span>
+              <div className="flex-1">
+                <div className="text-sm font-semibold text-[#005B9A] leading-tight">
+                  Book a Free Discovery Call
+                </div>
+                <div className="text-[11px] text-[#94A3B8] mt-0.5">30 minutes · No obligation</div>
+              </div>
+              <svg className="flex-shrink-0 opacity-40" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5" stroke="#475569" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </a>
+
+            <a 
+              className="flex items-center gap-3 p-3.5 px-4 rounded-[14px] border border-[#059669] bg-white no-underline"
+              href="https://go.berkshirepainclinic.co.uk/from-hurting-to-healing-membership"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              Ask Berkshire Pain Clinic's AI assistant about chronic pain, appointments, referrals, fees, and support options.
-            </motion.p>
-          </section>
-
-          {/* Info Box */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2 }}
-            className="bg-[#eff6ff] border border-blue-100 rounded-2xl p-6 md:p-8 shadow-sm"
-          >
-            <div className="flex gap-4">
-              <div className="hidden md:block">
-                <div className="bg-blue-100 p-2 rounded-full">
-                  <Info className="text-blue-500" size={20} />
+              <span className="text-lg w-7 text-center flex-shrink-0">💚</span>
+              <div className="flex-1">
+                <div className="text-sm font-semibold text-[#059669] leading-tight">
+                  From Hurting to Healing Membership
                 </div>
+                <div className="text-[11px] text-[#94A3B8] mt-0.5">Guided support · Open now</div>
               </div>
-              <div className="space-y-2">
-                <h3 className="text-lg font-bold text-slate-900">Not sure where to start?</h3>
-                <p className="text-slate-600 leading-relaxed">
-                  This assistant can help you understand whether Berkshire Pain Clinic may be right for you and what the next step could be.
-                </p>
+              <svg className="flex-shrink-0 opacity-40" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5" stroke="#475569" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </a>
+
+            <a 
+              className="flex items-center gap-3 p-3.5 px-4 rounded-[14px] border border-[#E2E8F0] bg-white no-underline"
+              href="https://go.berkshirepainclinic.co.uk/guide-"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="text-lg w-7 text-center flex-shrink-0">🎓</span>
+              <div className="flex-1">
+                <div className="text-sm font-semibold text-[#0F172A] leading-tight">
+                  Free Pain Guide
+                </div>
+                <div className="text-[11px] text-[#94A3B8] mt-0.5">Download instantly</div>
               </div>
+              <svg className="flex-shrink-0 opacity-40" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5" stroke="#475569" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </a>
+
+            <a 
+              className="flex items-center gap-3 p-3.5 px-4 rounded-[14px] border border-[#E2E8F0] bg-white no-underline"
+              href="https://www.youtube.com/channel/UCzahshjoAKhIhQV9UW4xs4A"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="text-lg w-7 text-center flex-shrink-0">▶️</span>
+              <div className="flex-1">
+                <div className="text-sm font-semibold text-[#0F172A] leading-tight">
+                  Patient Education Videos
+                </div>
+                <div className="text-[11px] text-[#94A3B8] mt-0.5">YouTube · Dr Deepak Ravindran</div>
+              </div>
+              <svg className="flex-shrink-0 opacity-40" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5" stroke="#475569" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </a>
+
+            <a 
+              className="flex items-center gap-3 p-3.5 px-4 rounded-[14px] border border-[#E2E8F0] bg-white no-underline"
+              href="https://www.berkshirepainclinic.co.uk/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="text-lg w-7 text-center flex-shrink-0">🌐</span>
+              <div className="flex-1">
+                <div className="text-sm font-semibold text-[#0F172A] leading-tight">
+                  Berkshire Pain Clinic Website
+                </div>
+                <div className="text-[11px] text-[#94A3B8] mt-0.5">berkshirepainclinic.co.uk</div>
+              </div>
+              <svg className="flex-shrink-0 opacity-40" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5" stroke="#475569" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </a>
+          </div>
+
+          {/* Footer */}
+          <div className="text-center pb-2">
+            <div className="flex justify-center gap-4 mb-3.5">
+              <a 
+                className="w-[34px] h-[34px] rounded-full bg-white border border-[#E2E8F0] flex items-center justify-center text-[13px] text-[#475569] no-underline hover:bg-[#F8FAFC]"
+                href="https://www.youtube.com/channel/UCzahshjoAKhIhQV9UW4xs4A"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="YouTube"
+              >
+                ▶
+              </a>
+              <a 
+                className="w-[34px] h-[34px] rounded-full bg-white border border-[#E2E8F0] flex items-center justify-center text-[13px] text-[#475569] no-underline hover:bg-[#F8FAFC]"
+                href="https://www.linkedin.com/in/deepak-ravindran-b225a61a/"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="LinkedIn"
+              >
+                in
+              </a>
+              <a 
+                className="w-[34px] h-[34px] rounded-full bg-white border border-[#E2E8F0] flex items-center justify-center text-[13px] text-[#475569] no-underline hover:bg-[#F8FAFC]"
+                href="https://www.facebook.com/BerkshirePainClinic/"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Facebook"
+              >
+                f
+              </a>
+              <a 
+                className="w-[34px] h-[34px] rounded-full bg-white border border-[#E2E8F0] flex items-center justify-center text-[13px] text-[#475569] no-underline hover:bg-[#F8FAFC]"
+                href="https://twitter.com/BerksPainClinic"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Twitter"
+              >
+                𝕏
+              </a>
             </div>
-          </motion.div>
-
-          {/* Chat Widget - DeepakRavindranAI Style */}
-          <section className="relative">
-            <Card className="overflow-hidden border-none shadow-2xl rounded-3xl">
-              <div className="w-full" style={{ minHeight: '600px', height: 'auto' }}>
-                <ChatbotFullPage />
-              </div>
-            </Card>
-          </section>
-
-          {/* Bullet Points Section */}
-          <section className="bg-[#eff6ff] rounded-2xl p-8 shadow-sm">
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {[
-                "Consultant-led pain care",
-                "Holistic and multidisciplinary approach",
-                "Insured and self-pay pathways",
-                "Based in Berkshire"
-              ].map((item, i) => (
-                <li key={i} className="flex items-center gap-4 text-slate-700 font-medium">
-                  <div className="w-2 h-2 rounded-full bg-blue-400" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </section>
-
-          {/* Checklist Section */}
-          <section className="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-sm">
-            <div className="p-8 space-y-8">
-              <h3 className="text-2xl font-bold text-slate-900">This page can help you:</h3>
-              <div className="space-y-5">
-                {[
-                  "Understand Berkshire's approach to ongoing pain",
-                  "Decide whether a discovery call or consultation is the better next step",
-                  "Ask about referrals, fees, insurance, and first appointments",
-                  "Learn about support options such as the From Hurting to Healing membership"
-                ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-4 group">
-                    <div className="mt-1 bg-blue-50 text-blue-600 p-1 rounded-md group-hover:bg-blue-100 transition-colors">
-                      <Check size={18} strokeWidth={3} />
-                    </div>
-                    <p className="text-slate-600 text-lg leading-snug">{item}</p>
-                  </div>
-                ))}
-              </div>
+            <div className="text-[11px] text-[#94A3B8] mb-1">
+              © Berkshire Pain Clinic · berkshirepainclinic.co.uk
             </div>
-
-            {/* Form Section */}
-            <div className="bg-slate-50 p-8 border-t border-slate-100 space-y-8">
-              <h4 className="text-xl font-bold text-slate-900">
-                Would you like our team to help you move forward?
-              </h4>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="space-y-2">
-                  <Input placeholder="Name" className="bg-white h-12 rounded-xl border-slate-200 focus-visible:ring-[#0095da]" />
-                </div>
-                <div className="space-y-2">
-                  <Input placeholder="Email" className="bg-white h-12 rounded-xl border-slate-200 focus-visible:ring-[#0095da]" />
-                </div>
-                <div className="space-y-2">
-                  <Input placeholder="Phone (optional)" className="bg-white h-12 rounded-xl border-slate-200 focus-visible:ring-[#0095da]" />
-                </div>
-              </div>
-              <Button className="w-full md:w-auto bg-[#0095da] hover:bg-blue-600 text-white px-10 h-14 rounded-xl font-bold text-lg shadow-lg shadow-blue-200 transition-all active:scale-95">
-                Submit Request
-              </Button>
+            <div className="text-[10px] text-[#94A3B8]">
+              AI page by <strong className="text-[#005B9A] font-semibold">NeuraScaleX</strong> · ask.berkshirepainclinic.co.uk
             </div>
-          </section>
-        </main>
+          </div>
 
-        {/* Footer */}
-        <footer className="max-w-4xl mx-auto px-6 mt-16 pb-12 text-center text-slate-400 text-sm">
-          <div className="w-12 h-1 bg-slate-200 mx-auto mb-8 rounded-full" />
-          <p>&copy; {new Date().getFullYear()} Berkshire Pain Clinic. All rights reserved.</p>
-        </footer>
+        </div>
       </div>
     </>
   );

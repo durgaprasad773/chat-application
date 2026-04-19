@@ -1,7 +1,4 @@
 import React, { useRef, useState } from 'react';
-import { Send } from 'lucide-react';
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 
 export function ChatInput({
   disabled,
@@ -30,40 +27,25 @@ export function ChatInput({
   };
 
   return (
-    <div className="bg-white p-4 border-t border-slate-100">
-      <div className="flex gap-3 mb-4">
-        <div className="relative flex-1">
-          <Input 
-            ref={inputRef}
-            placeholder="Type your question..." 
-            className="rounded-full bg-slate-50 border-slate-200 pr-12 h-12 focus-visible:ring-[#0095da] focus-visible:ring-offset-0"
-            style={{
-              '--color-ring': brandColour || '#0095da'
-            }}
-            value={inputValue}
-            onChange={handleInputChange}
-            onKeyPress={handleKeyPress}
-            disabled={disabled}
-          />
-          <Button 
-            size="icon" 
-            className="absolute right-1 top-1 rounded-full text-white hover:bg-blue-600 h-10 w-10 transition-all"
-            style={{ backgroundColor: brandColour || '#0095da' }}
-            onClick={handleSend}
-            disabled={!inputValue.trim() || disabled}
-          >
-            <Send size={18} />
-          </Button>
-        </div>
-      </div>
-      <div className="text-center space-y-1">
-        <p className="text-[10px] text-slate-400 uppercase tracking-widest font-bold">
-          Educational information only. Not a substitute for professional medical advice.
-        </p>
-        <p className="text-[10px] text-slate-400">
-          Powered by <span className="font-bold text-slate-600">NeurascaleX</span>
-        </p>
-      </div>
+    <div className="p-2.5 px-3 border-t border-[#E2E8F0] flex gap-2 items-center bg-white">
+      <input 
+        ref={inputRef}
+        placeholder="Type your question..." 
+        className="flex-1 text-sm px-3 py-2 rounded-[10px] border border-[#E2E8F0] bg-[#F8FAFC] text-[#94A3B8] focus:outline-none focus:border-[#005B9A] focus:text-[#0F172A]"
+        value={inputValue}
+        onChange={handleInputChange}
+        onKeyPress={handleKeyPress}
+        disabled={disabled}
+      />
+      <button 
+        className="w-[38px] h-[38px] rounded-[10px] bg-[#E2E8F0] flex items-center justify-center flex-shrink-0 hover:bg-[#CBD5E1] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        onClick={handleSend}
+        disabled={!inputValue.trim() || disabled}
+      >
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M14 8L2 2l2 6-2 6 12-6z" fill="#94A3B8"/>
+        </svg>
+      </button>
     </div>
   );
 }

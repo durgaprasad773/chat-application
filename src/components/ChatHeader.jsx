@@ -1,7 +1,4 @@
 import React from 'react';
-import { MoreHorizontal } from 'lucide-react';
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 
 export function ChatHeader({
   clinicName,
@@ -12,34 +9,24 @@ export function ChatHeader({
 }) {
   return (
     <div
-      className="bg-[#0095da] p-4 flex items-center justify-between text-white"
-      style={{ backgroundColor: brandColour || '#0095da' }}
+      className="p-3.5 px-4 border-b border-[#E2E8F0] flex items-center gap-2.5"
+      style={{ 
+        background: 'linear-gradient(135deg, rgba(0,91,154,.05) 0%, rgba(8,145,178,.03) 100%)'
+      }}
     >
-      <div className="flex items-center gap-3">
-        <Avatar className="w-10 h-10 border-2 border-white/20">
-          {logoUrl ? (
-            <AvatarImage src={logoUrl} alt={clinicName || 'AI Assistant'} />
-          ) : (
-            <AvatarImage src="https://api.dicebear.com/7.x/avataaars/svg?seed=AI" />
-          )}
-          <AvatarFallback className="bg-white/10 text-white font-bold">
-            {(clinicName || 'AI')[0]}
-          </AvatarFallback>
-        </Avatar>
-        <span className="font-semibold text-lg tracking-tight">
-          {clinicName || 'AI Assistant'}
-        </span>
+      <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#005B9A] to-[#0891B2] flex items-center justify-center flex-shrink-0">
+        <span className="text-[11px] text-white font-bold">AI</span>
       </div>
-      {showClose && (
-        <Button 
-          variant="ghost" 
-          size="icon" 
-          className="text-white hover:bg-white/10 rounded-full"
-          onClick={onClose}
-        >
-          <MoreHorizontal size={24} />
-        </Button>
-      )}
+      <div className="flex-1">
+        <div className="text-[13px] font-semibold text-[#0F172A]">Ask Dr Deepak AI</div>
+        <div className="flex items-center gap-1">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#059669] inline-block"></span>
+          <span className="text-[11px] text-[#059669] font-medium">Online now · Usually replies instantly</span>
+        </div>
+      </div>
+      <div className="ml-auto text-right">
+        <div className="text-[10px] text-[#94A3B8] leading-tight">Educational only<br />Not medical advice</div>
+      </div>
     </div>
   );
 }
