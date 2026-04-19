@@ -447,6 +447,8 @@ export function ChatbotFullPage({ config = {} }) {
             onTopic={handleTopic}
             isLatestBotMessage={index === latestBotMessageIndex}
             brandColour={chatConfig.brandColour}
+            logoUrl={chatConfig.logoUrl}
+            clinicName={chatConfig.clinicName}
           />
         ))}
 

@@ -15,8 +15,16 @@ function App() {
           
           {/* Identity Section */}
           <div className="text-center mb-6">
-            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#005B9A] to-[#0891B2] flex items-center justify-center mx-auto mb-3.5 shadow-[0_0_0_3px_#fff,_0_0_0_5px_#E8F2FB,_0_4px_16px_rgba(0,91,154,.2)]">
-              <span className="text-[26px] font-bold text-white font-serif">DR</span>
+            <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-3.5 shadow-[0_0_0_3px_#fff,_0_0_0_5px_#E8F2FB,_0_4px_16px_rgba(0,91,154,.2)] bg-white p-2">
+              <img 
+                src="/logo.png" 
+                alt="Berkshire Pain Clinic Logo" 
+                className="w-full h-full object-contain"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                  e.target.parentElement.innerHTML = '<div class="w-full h-full rounded-full bg-gradient-to-br from-[#005B9A] to-[#0891B2] flex items-center justify-center"><span class="text-[26px] font-bold text-white font-serif">DR</span></div>';
+                }}
+              />
             </div>
             <h1 className="font-serif text-2xl font-normal text-[#0F172A] mb-1">
               Berkshire Pain Clinic

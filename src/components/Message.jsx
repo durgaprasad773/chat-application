@@ -8,7 +8,9 @@ export function Message({
   onFollowUp,
   onTopic,
   isLatestBotMessage,
-  brandColour
+  brandColour,
+  logoUrl,
+  clinicName
 }) {
   const isUser = message.sender === 'user';
 
@@ -16,10 +18,24 @@ export function Message({
     <div className={`flex flex-col mb-2.5 ${isUser ? 'items-end' : 'items-start'}`}>
       {!isUser && (
         <div className="flex items-center gap-1.5 mb-1">
-          <div className="w-[18px] h-[18px] rounded-full bg-gradient-to-br from-[#005B9A] to-[#0891B2] flex items-center justify-center">
-            <span className="text-[8px] text-white font-bold">AI</span>
-          </div>
-          <span className="text-[10px] text-[#94A3B8] font-medium">Berkshire Pain Clinic AI</span>
+          {logoUrl ? (
+            <div className="w-[18px] h-[18px] rounded-full overflow-hidden">
+              <img 
+                src={logoUrl} 
+                alt={clinicName} 
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                  e.target.parentElement.innerHTML = '<div class="w-full h-full rounded-full bg-gradient-to-br from-[#005B9A] to-[#0891B2] flex items-center justify-center"><span class="text-[8px] text-white font-bold">AI</span></div>';
+                }}
+              />
+            </div>
+          ) : (
+            <div className="w-[18px] h-[18px] rounded-full bg-gradient-to-br from-[#005B9A] to-[#0891B2] flex items-center justify-center">
+              <span className="text-[8px] text-white font-bold">AI</span>
+            </div>
+          )}
+          <span className="text-[10px] text-[#94A3B8] font-medium">{clinicName || 'AI Assistant'}</span>
         </div>
       )}
       
