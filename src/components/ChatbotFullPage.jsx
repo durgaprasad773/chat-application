@@ -239,8 +239,7 @@ export function ChatbotFullPage({ config = {} }) {
         followUpQuestion: response.follow_up_question,
         suggestedTopics: response.suggested_topics,
         hasActionButton: response.has_action_button,
-        actionButtonText: response.action_button_text,
-        actionButtonUrl: response.action_button_url
+        actionButtons: response.action_buttons || []
       };
 
       setMessages(prev => [...prev, botMessage]);
@@ -258,7 +257,7 @@ export function ChatbotFullPage({ config = {} }) {
     }
   };
 
-  const handleStarterQuestion = async (questionText, answerText = null) => {
+  const handleStarterQuestion = async (questionText, answerText = null, actionUrl = null, actionLabel = null) => {
     if (isLoading) return;
 
     setShowStarterQuestions(false);
@@ -294,7 +293,9 @@ export function ChatbotFullPage({ config = {} }) {
         timestamp: new Date(),
         userReaction: null,
         followUpQuestion: null,
-        suggestedTopics: null
+        suggestedTopics: null,
+        hasActionButton: !!(actionUrl && actionLabel),
+        actionButtons: (actionUrl && actionLabel) ? [{ [actionLabel]: actionUrl }] : []
       };
 
       setMessages(prev => [...prev, botMessage]);

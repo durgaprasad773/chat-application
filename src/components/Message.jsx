@@ -51,15 +51,24 @@ export function Message({
           dangerouslySetInnerHTML={{ __html: parseMarkdown(message.text) }}
         />
         
-        {/* Action Button from API response */}
-        {!isUser && message.hasActionButton && message.actionButtonText && message.actionButtonUrl && (
-          <Button
-            variant="outline"
-            className="rounded-full border-[#005B9A] text-[#005B9A] hover:bg-blue-50 px-4 text-xs font-medium mt-2"
-            onClick={() => window.open(message.actionButtonUrl, '_blank', 'noopener,noreferrer')}
-          >
-            {message.actionButtonText}
-          </Button>
+        {/* Action Buttons from API response */}
+        {!isUser && message.hasActionButton && message.actionButtons && message.actionButtons.length > 0 && (
+          <div className="flex flex-wrap gap-2 mt-2">
+            {message.actionButtons.map((btnObj, idx) => {
+              const label = Object.keys(btnObj)[0];
+              const url = btnObj[label];
+              return (
+                <Button
+                  key={idx}
+                  variant="outline"
+                  className="rounded-full border-[#005B9A] text-[#005B9A] hover:bg-blue-50 px-4 text-xs font-medium"
+                  onClick={() => window.open(url, '_blank', 'noopener,noreferrer')}
+                >
+                  {label}
+                </Button>
+              );
+            })}
+          </div>
         )}
       </div>
 

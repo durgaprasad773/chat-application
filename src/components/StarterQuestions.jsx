@@ -13,9 +13,9 @@ export function StarterQuestions({
   if (!hasQuestions) return null;
 
   const questionsList = [
-    { q: questions.q1, a: questions.a1 },
-    { q: questions.q2, a: questions.a2 },
-    { q: questions.q3, a: questions.a3 }
+    { q: questions.q1, a: questions.a1, url: questions.Url1, buttonLabel: questions.ButtonLabel1 },
+    { q: questions.q2, a: questions.a2, url: questions.Url2, buttonLabel: questions.ButtonLabel2 },
+    { q: questions.q3, a: questions.a3, url: questions.Url3, buttonLabel: questions.ButtonLabel3 }
   ].filter(item => item.q);
 
   return (
@@ -26,7 +26,7 @@ export function StarterQuestions({
           key={i}
           whileHover={{ scale: 1.02, backgroundColor: "#f8fafc" }}
           whileTap={{ scale: 0.98 }}
-          onClick={() => onSelectQuestion(item.q, item.a)}
+          onClick={() => onSelectQuestion(item.q, item.a, item.url, item.buttonLabel)}
           disabled={isLoading}
           className="bg-white border border-slate-200 text-slate-700 px-5 py-3 rounded-2xl rounded-tr-none shadow-sm hover:border-blue-300 hover:text-blue-600 transition-all text-right max-w-[85%] text-sm md:text-base disabled:opacity-50 disabled:cursor-not-allowed"
         >
