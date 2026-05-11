@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button } from "@/components/ui/button";
 
 export function CTAButtons({
   bookNowShow,
@@ -19,57 +18,46 @@ export function CTAButtons({
   onCTAThree,
   brandColour
 }) {
-  if (!bookNowShow && !sendEmailShow && !ctaTwoShow && !ctaThreeShow) {
-    return null;
-  }
+  const actions = [
+    { show: bookNowShow, label: bookNowText, onClick: onBookNow, url: bookNowUrl },
+    { show: ctaTwoShow, label: ctaTwoText, onClick: onCTATwo, url: ctaTwoUrl },
+    { show: sendEmailShow, label: sendEmailText, onClick: onSendEmail, url: null },
+    { show: ctaThreeShow, label: ctaThreeText, onClick: onCTAThree, url: ctaThreeUrl }
+  ].filter(a => a.show && a.label);
 
-  const buttonStyle = {
-    borderColor: brandColour || '#0095da',
-    color: brandColour || '#0095da'
-  };
+  if (actions.length === 0) return null;
+
+  const colour = brandColour || '#0095da';
 
   return (
-    <div className="bg-white px-6 py-4 flex flex-wrap gap-3">
-      {bookNowShow && (
-        <Button 
-          variant="outline" 
-          className="rounded-full border-[#0095da] text-[#0095da] hover:bg-blue-50 px-6 font-medium"
-          style={buttonStyle}
-          onClick={onBookNow}
+    <div
+      className="flex gap-[10px] overflow-x-auto px-4 py-2 border-t border-[#E2E8F0]"
+      style={{ scrollbarWidth: 'none' }}
+    >
+      {actions.map((action, idx) => (
+        <a
+          key={idx}
+          className="flex-none text-center border-2 rounded-full px-[14px] py-[6px] text-[12px] font-semibold transition-all cursor-pointer bg-white"
+          style={{
+            minWidth: '130px',
+            borderColor: colour,
+            color: colour,
+            textDecoration: 'none',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.06)'
+          }}
+          href={action.url || '#'}
+          target={action.url && action.url.startsWith('http') ? '_blank' : undefined}
+          rel={action.url && action.url.startsWith('http') ? 'noopener noreferrer' : undefined}
+          onClick={(e) => {
+            if (action.onClick) {
+              e.preventDefault();
+              action.onClick();
+            }
+          }}
         >
-          {bookNowText}
-        </Button>
-      )}
-      {ctaTwoShow && (
-        <Button 
-          variant="outline" 
-          className="rounded-full border-[#0095da] text-[#0095da] hover:bg-blue-50 px-6 font-medium"
-          style={buttonStyle}
-          onClick={onCTATwo}
-        >
-          {ctaTwoText}
-        </Button>
-      )}
-      {sendEmailShow && (
-        <Button 
-          variant="outline" 
-          className="rounded-full border-[#0095da] text-[#0095da] hover:bg-blue-50 px-6 font-medium"
-          style={buttonStyle}
-          onClick={onSendEmail}
-        >
-          {sendEmailText}
-        </Button>
-      )}
-      {ctaThreeShow && (
-        <Button 
-          variant="outline" 
-          className="rounded-full border-[#0095da] text-[#0095da] hover:bg-blue-50 px-6 font-medium"
-          style={buttonStyle}
-          onClick={onCTAThree}
-        >
-          {ctaThreeText}
-        </Button>
-      )}
+          {action.label}
+        </a>
+      ))}
     </div>
   );
 }

@@ -5,6 +5,7 @@ import { ChatFooter } from './ChatFooter';
 import { Message } from './Message';
 import { TypingIndicator } from './TypingIndicator';
 import { StarterQuestions } from './StarterQuestions';
+import { CTAButtons } from './CTAButtons';
 import { EmailFormModal } from './EmailFormModal';
 import {
   WIDGET_ID,
@@ -507,6 +508,26 @@ export function ChatbotFullPage({ config = {} }) {
           </div>
         </div>
       )}
+
+      {/* CTA Buttons */}
+      <CTAButtons
+        bookNowShow={chatConfig.bookNowShow}
+        bookNowText={chatConfig.bookNowText}
+        bookNowUrl={chatConfig.bookNowUrl}
+        sendEmailShow={chatConfig.sendEmailShow}
+        sendEmailText={chatConfig.sendEmailText}
+        ctaTwoShow={chatConfig.ctaTwoShow}
+        ctaTwoText={chatConfig.ctaTwoText}
+        ctaTwoUrl={chatConfig.ctaTwoUrl}
+        ctaThreeShow={chatConfig.ctaThreeShow}
+        ctaThreeText={chatConfig.ctaThreeText}
+        ctaThreeUrl={chatConfig.ctaThreeUrl}
+        onBookNow={handleBookNow}
+        onSendEmail={handleSendEmail}
+        onCTATwo={handleCTATwo}
+        onCTAThree={handleCTAThree}
+        brandColour={chatConfig.brandColour}
+      />
 
       {/* Input Area */}
       <ChatInput
