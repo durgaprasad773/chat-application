@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { ChatbotFullPage } from './components/ChatbotFullPage';
 import './index.css';
 
 function App() {
+  const scrollToChat = () => {
+    const el = document.getElementById('chat-widget');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return (
     <>
       <div 
@@ -47,7 +52,7 @@ function App() {
           </div>
 
           {/* Chat Widget */}
-          <div className="mb-5">
+          <div id="chat-widget" className="mb-5">
             <ChatbotFullPage />
           </div>
 
@@ -203,6 +208,53 @@ function App() {
 
         </div>
       </div>
+
+      {/* Floating Chat Button */}
+      <button
+        type="button"
+        onClick={scrollToChat}
+        aria-label="Ask Dr Deepak Ravindran"
+        style={{
+          position: 'fixed',
+          right: 18,
+          bottom: 18,
+          zIndex: 50,
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: 10,
+          background: 'linear-gradient(135deg, #005B9A, #0891B2)',
+          color: '#fff',
+          border: '2px solid rgba(255,255,255,0.9)',
+          borderRadius: 999,
+          padding: '13px 17px',
+          boxShadow: '0 18px 36px rgba(0,91,154,0.28)',
+          fontSize: 14,
+          fontWeight: 700,
+          cursor: 'pointer',
+          transition: 'transform 0.18s ease, box-shadow 0.18s ease',
+          fontFamily: "'DM Sans', sans-serif",
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = 'translateY(-2px)';
+          e.currentTarget.style.boxShadow = '0 22px 44px rgba(0,91,154,0.34)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = 'translateY(0)';
+          e.currentTarget.style.boxShadow = '0 18px 36px rgba(0,91,154,0.28)';
+        }}
+      >
+        <span
+          style={{
+            width: 30, height: 30, borderRadius: 999,
+            display: 'grid', placeItems: 'center',
+            background: '#fff',
+            color: '#005B9A', fontSize: 15, flexShrink: 0,
+          }}
+        >
+          💬
+        </span>
+        <span style={{ whiteSpace: 'nowrap' }}>Ask Dr Deepak Ravindran</span>
+      </button>
     </>
   );
 }
