@@ -9,37 +9,34 @@ export function ChatHeader({
 }) {
   return (
     <div
-      className="p-3.5 px-4 border-b border-[#E2E8F0] flex items-center gap-2.5"
-      style={{ 
-        background: 'linear-gradient(135deg, rgba(0,91,154,.05) 0%, rgba(8,145,178,.03) 100%)'
-      }}
+      className="flex justify-between items-center gap-[14px] px-[18px] py-[16px] border-b border-[#dce8ee]"
+      style={{ background: 'linear-gradient(180deg, #fff, #f8fbfb)' }}
     >
-      {logoUrl ? (
-        <div className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0">
-          <img 
-            src={logoUrl} 
-            alt={clinicName} 
-            className="w-full h-full object-cover"
-            onError={(e) => {
-              e.target.style.display = 'none';
-              e.target.parentElement.innerHTML = '<div class="w-full h-full rounded-full bg-gradient-to-br from-[#005B9A] to-[#0891B2] flex items-center justify-center"><span class="text-[11px] text-white font-bold">AI</span></div>';
-            }}
-          />
+      <div className="flex items-center gap-3">
+        <div
+          className="flex-shrink-0 rounded-full overflow-hidden border-2 border-white bg-white"
+          style={{ width: 46, height: 46, boxShadow: '0 8px 18px rgba(18,45,60,.12)' }}
+        >
+          {logoUrl ? (
+            <img
+              src={logoUrl}
+              alt={clinicName}
+              className="w-full h-full object-contain"
+              onError={(e) => { e.target.style.display = 'none'; }}
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center bg-[#1f5f64]">
+              <span className="text-[13px] text-white font-bold">AI</span>
+            </div>
+          )}
         </div>
-      ) : (
-        <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#005B9A] to-[#0891B2] flex items-center justify-center flex-shrink-0">
-          <span className="text-[11px] text-white font-bold">AI</span>
-        </div>
-      )}
-      <div className="flex-1">
-        <div className="text-[13px] font-semibold text-[#0F172A]">{clinicName}</div>
-        <div className="flex items-center gap-1">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#059669] inline-block"></span>
-          <span className="text-[11px] text-[#059669] font-medium">Online now</span>
+        <div>
+          <div className="text-[16px] font-black text-[#163447]" style={{ fontWeight: 950 }}>{clinicName}</div>
+          <div className="text-[12px] font-extrabold" style={{ color: '#22a569', fontWeight: 850, marginTop: 2 }}>● Online now</div>
         </div>
       </div>
-      <div className="ml-auto text-right">
-        <div className="text-[10px] text-[#94A3B8] leading-tight">Educational only<br />Not medical advice</div>
+      <div className="text-right text-[11px] leading-snug" style={{ color: '#7a8898', fontWeight: 760 }}>
+        Educational only<br />Not medical advice
       </div>
     </div>
   );

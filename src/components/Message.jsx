@@ -40,14 +40,30 @@ export function Message({
       )}
       
       <div
-        className={`px-3.5 py-2.5 max-w-[88%] break-words shadow-sm ${
-          isUser
-            ? 'rounded-[14px_4px_14px_14px] bg-[#005B9A] text-white shadow-[0_2px_10px_rgba(0,91,154,.25)]'
-            : 'rounded-[4px_14px_14px_14px] bg-white text-[#0F172A] border border-[#E2E8F0] shadow-[0_1px_6px_rgba(0,0,0,.07)]'
-        }`}
+        style={isUser ? {
+          padding: '10px 14px',
+          maxWidth: '88%',
+          wordBreak: 'break-words',
+          borderRadius: '14px 4px 14px 14px',
+          background: '#1f5f64',
+          color: '#fff',
+          boxShadow: '0 2px 10px rgba(31,95,100,.22)',
+        } : {
+          padding: '16px',
+          maxWidth: '88%',
+          wordBreak: 'break-words',
+          background: '#fff',
+          border: '1px solid #dce8ee',
+          borderRadius: '18px',
+          borderTopLeftRadius: '8px',
+          boxShadow: '0 8px 22px rgba(18,45,60,.06)',
+          color: '#213244',
+          fontSize: 15,
+          lineHeight: 1.62,
+        }}
       >
         <div
-          className="text-sm leading-relaxed"
+          className="leading-relaxed"
           dangerouslySetInnerHTML={{ __html: parseMarkdown(message.text) }}
         />
         
@@ -61,7 +77,7 @@ export function Message({
                 <Button
                   key={idx}
                   variant="outline"
-                  className="rounded-full border-[#005B9A] text-[#005B9A] hover:bg-blue-50 px-4 text-xs font-medium"
+                  className="rounded-full border-[#1f5f64] text-[#1f5f64] hover:bg-[#eaf5f7] px-4 text-xs font-medium"
                   onClick={() => window.open(url, '_blank', 'noopener,noreferrer')}
                 >
                   {label}

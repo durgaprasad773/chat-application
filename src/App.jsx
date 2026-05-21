@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { ChatbotFullPage } from './components/ChatbotFullPage';
 import './index.css';
 
@@ -8,252 +8,190 @@ function App() {
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
+  const quickLinks = [
+    {
+      icon: '📅',
+      href: 'https://go.berkshirepainclinic.co.uk/apply-',
+      title: 'Book a Free Discovery Call',
+      sub: 'Speak to the team and understand whether the clinic pathway may be suitable.',
+    },
+    {
+      icon: '£',
+      href: 'https://www.berkshirepainclinic.co.uk/fees-pain-specialist-reading-berkshire/',
+      title: 'Check Fees / Insurance / Self-Pay',
+      sub: 'Review practical information before contacting the team.',
+    },
+    {
+      icon: '🌿',
+      href: 'https://go.berkshirepainclinic.co.uk/from-hurting-to-healing-membership',
+      title: 'From Hurting to Healing Membership',
+      sub: 'Educational membership and whole-person pain support resources.',
+    },
+    {
+      icon: '📘',
+      href: 'https://go.berkshirepainclinic.co.uk/guide-',
+      title: 'Free Pain Guide',
+      sub: 'Start with a practical educational guide before deciding your next step.',
+    },
+    {
+      icon: '📖',
+      href: 'https://deepakravindran.co.uk/the-pain-free-mindset/',
+      title: "The Pain Free Mindset – Dr Deepak's Book",
+      sub: "Read the book that shapes the foundations of this assistant and Dr Deepak's pain philosophy.",
+    },
+    {
+      icon: '▶',
+      href: 'https://www.berkshirepainclinic.co.uk/dr-deepak-ravindran-videos-pain-specialist-reading-berkshire/',
+      title: 'YouTube Videos / Educational Resources',
+      sub: 'Watch educational videos on persistent pain, whole-person care and recovery.',
+    },
+  ];
+
+  const socials = [
+    { href: 'https://deepakravindran.co.uk/', label: 'Website' },
+    { href: 'https://www.linkedin.com/in/deepak-ravindran-b225a61a/', label: 'LinkedIn' },
+    { href: 'https://www.youtube.com/@drdeepakravindran5361', label: 'YouTube' },
+    { href: 'https://twitter.com/BerksPainClinic', label: 'X / Twitter' },
+    { href: 'https://www.instagram.com/drdeepakravindran/', label: 'Instagram' },
+    { href: 'https://www.facebook.com/BerkshirePainClinic/', label: 'Facebook' },
+  ];
+
   return (
     <>
-      <div 
-        className="min-h-screen bg-[#F0F4F8] flex justify-center"
-        style={{ 
-          fontFamily: "'DM Sans', sans-serif"
-        }}
-      >
-        <div className="w-full max-w-[460px] px-4 py-8">
-          
-          {/* Identity Section */}
-          <div className="text-center mb-6">
-            <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-3.5 shadow-[0_0_0_3px_#fff,_0_0_0_5px_#E8F2FB,_0_4px_16px_rgba(0,91,154,.2)] bg-white p-2">
-              <img 
-                src="/logo.png" 
-                alt="Berkshire Pain Clinic Logo" 
-                className="w-full h-full object-contain"
-                onError={(e) => {
-                  e.target.style.display = 'none';
-                  e.target.parentElement.innerHTML = '<div class="w-full h-full rounded-full bg-gradient-to-br from-[#005B9A] to-[#0891B2] flex items-center justify-center"><span class="text-[26px] font-bold text-white font-serif">DR</span></div>';
-                }}
-              />
+      <main className="ask-page">
+        <div className="ask-shell">
+
+          {/* Hero */}
+          <header className="ask-hero">
+            <div className="ask-expert-identity">
+              <div className="ask-expert-photo">
+                <img
+                  src="/logo.png"
+                  alt="Dr Deepak Ravindran"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                  }}
+                />
+              </div>
+              <h1 className="ask-expert-name">Dr Deepak Ravindran</h1>
+              <p className="ask-expert-subtitle">Consultant in Pain Medicine · Berkshire Pain Clinic</p>
+              <div className="ask-credential-strip">
+                <span>20+ years experience</span>
+                <span>The UK's Go-To Doctor in Pain Management</span>
+                <span>Best Selling Author</span>
+              </div>
             </div>
-            <h1 className="font-serif text-2xl font-normal text-[#0F172A] mb-1">
-              Berkshire Pain Clinic
-            </h1>
-            <div className="text-[13px] text-[#475569] mb-2 leading-relaxed">
-              Prof. Dr Deepak Ravindran &amp; Team<br />
-              <span className="text-[#94A3B8]">Consultant Pain Medicine · Reading, Berkshire</span>
+
+            <p className="ask-subtitle">
+              A simple educational starting point for people living with persistent pain who want to
+              understand their options before booking or taking the next step.
+            </p>
+
+            <div className="ask-positioning-tabs">
+              <span className="ask-tab">Persistent Pain Support</span>
+              <span className="ask-tab ask-tab-gold">Consultant-led Education</span>
             </div>
-            <div className="flex justify-center gap-1.5 flex-wrap">
-              <span className="text-[11px] px-2.5 py-1 rounded-full bg-[#E8F2FB] text-[#005B9A] font-medium">
-                Insured &amp; Self-pay
-              </span>
-              <span className="text-[11px] px-2.5 py-1 rounded-full bg-[#E8F2FB] text-[#005B9A] font-medium">
-                Holistic &amp; Integrative
-              </span>
-              <span className="text-[11px] px-2.5 py-1 rounded-full bg-[#E8F2FB] text-[#005B9A] font-medium">
-                Consultant-led
-              </span>
-            </div>
-          </div>
+          </header>
 
           {/* Chat Widget */}
-          <div id="chat-widget" className="mb-5">
+          <section id="chat-widget" style={{ margin: '24px 0 18px' }}>
             <ChatbotFullPage />
-          </div>
+          </section>
 
-          {/* Divider */}
-          <div className="flex items-center gap-2.5 mb-4">
-            <div className="flex-1 h-px bg-[#E2E8F0]"></div>
-            <span className="text-[11px] text-[#94A3B8] font-medium tracking-wider uppercase">
-              Quick links
-            </span>
-            <div className="flex-1 h-px bg-[#E2E8F0]"></div>
-          </div>
+          {/* Why Ask Deepak exists */}
+          <section className="ask-card">
+            <h2>Why Ask Deepak exists</h2>
+            <p>
+              After 20 years in NHS pain medicine, the same questions come up again and again — often
+              when clinics are closed and Google is the only option. Ask Deepak is designed to give
+              clear, honest educational information based on Dr Deepak's book, approach and clinical
+              experience, so people can understand their options before speaking with the team.
+            </p>
+          </section>
 
-          {/* Links */}
-          <div className="flex flex-col gap-2 mb-6">
-            <a 
-              className="flex items-center gap-3 p-3.5 px-4 rounded-[14px] border border-[#005B9A] bg-white hover:bg-[#E8F2FB] transition-colors no-underline"
-              href="https://go.berkshirepainclinic.co.uk/dc-"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span className="text-lg w-7 text-center flex-shrink-0">📅</span>
-              <div className="flex-1">
-                <div className="text-sm font-semibold text-[#005B9A] leading-tight">
-                  Book a Free Discovery Call
-                </div>
-                <div className="text-[11px] text-[#94A3B8] mt-0.5">30 minutes · No obligation</div>
-              </div>
-              <svg className="flex-shrink-0 opacity-40" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5" stroke="#475569" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </a>
-
-            <a 
-              className="flex items-center gap-3 p-3.5 px-4 rounded-[14px] border border-[#059669] bg-white hover:bg-[#ECFDF5] transition-colors no-underline"
-              href="https://go.berkshirepainclinic.co.uk/from-hurting-to-healing-membership"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span className="text-lg w-7 text-center flex-shrink-0">💚</span>
-              <div className="flex-1">
-                <div className="text-sm font-semibold text-[#059669] leading-tight">
-                  From Hurting to Healing Membership
-                </div>
-                <div className="text-[11px] text-[#94A3B8] mt-0.5">Guided support · Open now</div>
-              </div>
-              <svg className="flex-shrink-0 opacity-40" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5" stroke="#475569" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </a>
-
-            <a 
-              className="flex items-center gap-3 p-3.5 px-4 rounded-[14px] border border-[#E2E8F0] bg-white hover:bg-[#F8FAFC] transition-colors no-underline"
-              href="https://go.berkshirepainclinic.co.uk/guide-"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span className="text-lg w-7 text-center flex-shrink-0">🎓</span>
-              <div className="flex-1">
-                <div className="text-sm font-semibold text-[#0F172A] leading-tight">
-                  Free Pain Guide
-                </div>
-                <div className="text-[11px] text-[#94A3B8] mt-0.5">Download instantly</div>
-              </div>
-              <svg className="flex-shrink-0 opacity-40" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5" stroke="#475569" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </a>
-
-            <a 
-              className="flex items-center gap-3 p-3.5 px-4 rounded-[14px] border border-[#E2E8F0] bg-white hover:bg-[#F8FAFC] transition-colors no-underline"
-              href="https://www.youtube.com/channel/UCzahshjoAKhIhQV9UW4xs4A"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span className="text-lg w-7 text-center flex-shrink-0">▶️</span>
-              <div className="flex-1">
-                <div className="text-sm font-semibold text-[#0F172A] leading-tight">
-                  Patient Education Videos
-                </div>
-                <div className="text-[11px] text-[#94A3B8] mt-0.5">YouTube · Dr Deepak Ravindran</div>
-              </div>
-              <svg className="flex-shrink-0 opacity-40" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5" stroke="#475569" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </a>
-
-            <a 
-              className="flex items-center gap-3 p-3.5 px-4 rounded-[14px] border border-[#E2E8F0] bg-white hover:bg-[#F8FAFC] transition-colors no-underline"
-              href="https://www.berkshirepainclinic.co.uk/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span className="text-lg w-7 text-center flex-shrink-0">🌐</span>
-              <div className="flex-1">
-                <div className="text-sm font-semibold text-[#0F172A] leading-tight">
-                  Berkshire Pain Clinic Website
-                </div>
-                <div className="text-[11px] text-[#94A3B8] mt-0.5">berkshirepainclinic.co.uk</div>
-              </div>
-              <svg className="flex-shrink-0 opacity-40" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5" stroke="#475569" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </a>
-          </div>
-
-          {/* Footer */}
-          <div className="text-center pb-2">
-            <div className="flex justify-center gap-4 mb-3.5">
-              <a 
-                className="w-[34px] h-[34px] rounded-full bg-white border border-[#E2E8F0] flex items-center justify-center text-[13px] text-[#475569] no-underline hover:bg-[#F8FAFC]"
-                href="https://www.youtube.com/channel/UCzahshjoAKhIhQV9UW4xs4A"
+          {/* Useful Links */}
+          <div className="ask-section-label">Useful Links</div>
+          <section className="ask-quick-links">
+            {quickLinks.map((link, i) => (
+              <a
+                key={i}
+                className="ask-link-card"
+                href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                title="YouTube"
               >
-                ▶
+                <div className="ask-icon">{link.icon}</div>
+                <div>
+                  <div className="ask-link-title">{link.title}</div>
+                  <div className="ask-link-sub">{link.sub}</div>
+                </div>
+                <div className="ask-arrow">→</div>
               </a>
-              <a 
-                className="w-[34px] h-[34px] rounded-full bg-white border border-[#E2E8F0] flex items-center justify-center text-[13px] text-[#475569] no-underline hover:bg-[#F8FAFC]"
-                href="https://www.linkedin.com/in/deepak-ravindran-b225a61a/"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="LinkedIn"
-              >
-                in
-              </a>
-              <a 
-                className="w-[34px] h-[34px] rounded-full bg-white border border-[#E2E8F0] flex items-center justify-center text-[13px] text-[#475569] no-underline hover:bg-[#F8FAFC]"
-                href="https://www.facebook.com/BerkshirePainClinic/"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Facebook"
-              >
-                f
-              </a>
-              <a 
-                className="w-[34px] h-[34px] rounded-full bg-white border border-[#E2E8F0] flex items-center justify-center text-[13px] text-[#475569] no-underline hover:bg-[#F8FAFC]"
-                href="https://twitter.com/BerksPainClinic"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Twitter"
-              >
-                𝕏
-              </a>
+            ))}
+          </section>
+
+          {/* What Ask Deepak can help with */}
+          <section className="ask-card" style={{ marginTop: '16px' }}>
+            <h2>What Ask Deepak can help with</h2>
+            <div className="ask-support-grid">
+              <div className="ask-support-item">
+                <h3>Understanding persistent pain</h3>
+                <p>
+                  Simple educational explanations around persistent pain, whole-person care and why
+                  pain can continue even after tissues have healed.
+                </p>
+              </div>
+              <div className="ask-support-item">
+                <h3>Finding the right resource</h3>
+                <p>
+                  Guidance towards clinic information, the membership, free guides, videos or a
+                  discovery call depending on what you ask.
+                </p>
+              </div>
             </div>
-            <div className="text-[11px] text-[#94A3B8] mb-1">
-              © Berkshire Pain Clinic · berkshirepainclinic.co.uk
-            </div>
-            <div className="text-[10px] text-[#94A3B8]">
-              AI page by <a href="https://www.neurascalex.com/" target="_blank" rel="noopener noreferrer" className="no-underline hover:underline"><strong className="text-[#005B9A] font-semibold">NeuraScaleX</strong></a> · ask.berkshirepainclinic.co.uk
-            </div>
+          </section>
+
+          {/* Footer Socials */}
+          <div className="ask-footer-socials">
+            {socials.map((s, i) => (
+              <a
+                key={i}
+                className="ask-social"
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {s.label}
+              </a>
+            ))}
           </div>
+
+          <footer className="ask-footer">
+            © Dr Deepak Ravindran · Ask Deepak page powered by{' '}
+            <a
+              className="ask-powered-link"
+              href="https://www.neurascalex.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              NeuraScaleX
+            </a>
+            <br />
+            Educational information only. Not a substitute for professional medical advice, diagnosis,
+            treatment, medication advice or crisis support.
+          </footer>
 
         </div>
-      </div>
+      </main>
 
       {/* Floating Chat Button */}
       <button
         type="button"
+        className="ask-floating-chat"
         onClick={scrollToChat}
-        aria-label="Ask Dr Deepak Ravindran"
-        style={{
-          position: 'fixed',
-          right: 18,
-          bottom: 18,
-          zIndex: 50,
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: 10,
-          background: 'linear-gradient(135deg, #005B9A, #0891B2)',
-          color: '#fff',
-          border: '2px solid rgba(255,255,255,0.9)',
-          borderRadius: 999,
-          padding: '13px 17px',
-          boxShadow: '0 18px 36px rgba(0,91,154,0.28)',
-          fontSize: 14,
-          fontWeight: 700,
-          cursor: 'pointer',
-          transition: 'transform 0.18s ease, box-shadow 0.18s ease',
-          fontFamily: "'DM Sans', sans-serif",
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.transform = 'translateY(-2px)';
-          e.currentTarget.style.boxShadow = '0 22px 44px rgba(0,91,154,0.34)';
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.transform = 'translateY(0)';
-          e.currentTarget.style.boxShadow = '0 18px 36px rgba(0,91,154,0.28)';
-        }}
+        aria-label="Ask Deepak"
       >
-        <span
-          style={{
-            width: 30, height: 30, borderRadius: 999,
-            display: 'grid', placeItems: 'center',
-            background: '#fff',
-            color: '#005B9A', fontSize: 15, flexShrink: 0,
-          }}
-        >
-          💬
-        </span>
-        <span style={{ whiteSpace: 'nowrap' }}>Ask Dr Deepak Ravindran</span>
+        💬 Ask Deepak
       </button>
     </>
   );

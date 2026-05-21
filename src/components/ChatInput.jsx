@@ -27,24 +27,54 @@ export function ChatInput({
   };
 
   return (
-    <div className="p-2.5 px-3 border-t border-[#E2E8F0] flex gap-2 items-center bg-white">
-      <input 
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: '1fr 44px',
+        gap: 8,
+        margin: '14px 18px 18px',
+      }}
+    >
+      <input
         ref={inputRef}
-        placeholder="Type your question..." 
-        className="flex-1 text-sm px-3 py-2 rounded-[10px] border border-[#E2E8F0] bg-[#F8FAFC] text-[#94A3B8] focus:outline-none focus:border-[#005B9A] focus:text-[#0F172A]"
+        placeholder="Type your question..."
+        style={{
+          height: 43,
+          display: 'flex',
+          alignItems: 'center',
+          color: inputValue ? '#213244' : '#a7b3be',
+          padding: '0 14px',
+          border: '1px solid #dce8ee',
+          background: '#fff',
+          borderRadius: 13,
+          fontSize: 13,
+          outline: 'none',
+          width: '100%',
+        }}
         value={inputValue}
         onChange={handleInputChange}
         onKeyPress={handleKeyPress}
         disabled={disabled}
       />
-      <button 
-        className="w-[38px] h-[38px] rounded-[10px] bg-[#E2E8F0] flex items-center justify-center flex-shrink-0 hover:bg-[#CBD5E1] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+      <button
+        style={{
+          border: 0,
+          borderRadius: 13,
+          background: '#e4f4f5',
+          color: '#1f5f64',
+          fontSize: 20,
+          fontWeight: 900,
+          cursor: disabled || !inputValue.trim() ? 'not-allowed' : 'pointer',
+          opacity: disabled || !inputValue.trim() ? 0.5 : 1,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
         onClick={handleSend}
         disabled={!inputValue.trim() || disabled}
+        aria-label="Send"
       >
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-          <path d="M14 8L2 2l2 6-2 6 12-6z" fill="#94A3B8"/>
-        </svg>
+        ↑
       </button>
     </div>
   );

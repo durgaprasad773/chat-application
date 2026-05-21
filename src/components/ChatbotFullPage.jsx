@@ -428,7 +428,7 @@ export function ChatbotFullPage({ config = {} }) {
   const latestBotMessageIndex = getLatestBotMessageIndex();
 
   return (
-    <div className="w-full bg-white rounded-[20px] border border-[#E2E8F0] overflow-hidden shadow-[0_4px_24px_rgba(15,23,42,.08)]">
+    <div className="w-full bg-white rounded-[28px] border border-[#dce8ee] overflow-hidden" style={{ boxShadow: '0 10px 28px rgba(18,45,60,.07)' }}>
       {/* Header */}
       <ChatHeader
         clinicName={truncateText(chatConfig.clinicName, headerMaxLength)}
@@ -439,7 +439,7 @@ export function ChatbotFullPage({ config = {} }) {
       />
 
       {/* Messages Area */}
-      <div className="overflow-y-auto bg-[#F8FAFC] px-3.5 py-4" style={{ minHeight: '400px', maxHeight: '500px' }}>
+      <div className="overflow-y-auto px-[18px] py-[18px]" style={{ minHeight: '400px', maxHeight: '500px', background: 'linear-gradient(180deg, #fbfefe, #f5fafb)' }}>
         {messages.map((message, index) => (
           <Message
             key={message.id}
@@ -472,42 +472,6 @@ export function ChatbotFullPage({ config = {} }) {
 
         <div ref={messagesEndRef} />
       </div>
-
-      {/* Suggestions/Starter Questions */}
-      {showStarterQuestions && !messages.length && starterQuestions && (
-        <div className="px-3.5 pb-3 bg-[#F8FAFC]">
-          <div className="text-[10px] text-[#94A3B8] mb-1.5 font-medium tracking-wider uppercase">Choose a topic to get started</div>
-          <div className="flex flex-wrap gap-1.5">
-            {starterQuestions.q1 && (
-              <button
-                onClick={() => handleStarterQuestion(starterQuestions.q1, starterQuestions.a1)}
-                disabled={isLoading}
-                className="text-xs px-2.5 py-1.5 rounded-full border border-[#E2E8F0] bg-white text-[#475569] hover:border-[#005B9A] hover:text-[#005B9A] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {starterQuestions.q1}
-              </button>
-            )}
-            {starterQuestions.q2 && (
-              <button
-                onClick={() => handleStarterQuestion(starterQuestions.q2, starterQuestions.a2)}
-                disabled={isLoading}
-                className="text-xs px-2.5 py-1.5 rounded-full border border-[#E2E8F0] bg-white text-[#475569] hover:border-[#005B9A] hover:text-[#005B9A] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {starterQuestions.q2}
-              </button>
-            )}
-            {starterQuestions.q3 && (
-              <button
-                onClick={() => handleStarterQuestion(starterQuestions.q3, starterQuestions.a3)}
-                disabled={isLoading}
-                className="text-xs px-2.5 py-1.5 rounded-full border border-[#E2E8F0] bg-white text-[#475569] hover:border-[#005B9A] hover:text-[#005B9A] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {starterQuestions.q3}
-              </button>
-            )}
-          </div>
-        </div>
-      )}
 
       {/* CTA Buttons */}
       <CTAButtons

@@ -2,11 +2,19 @@ import React from 'react';
 
 export function ChatFooter() {
   return (
-    <div className="px-3.5 py-2 bg-[#F8FAFC] border-t border-[#E2E8F0] text-center">
-      <div className="text-[10px] text-[#94A3B8]">
-        Educational information only · Not a substitute for professional medical advice · Powered by{' '}
-        <a href="https://www.neurascalex.com/" target="_blank" rel="noopener noreferrer" className="no-underline hover:underline"><strong className="text-[#005B9A] font-semibold">NeuraScaleX</strong></a>
-      </div>
+    <div
+      className="text-center"
+      style={{ padding: '0 14px 14px', color: '#7e8d9d', fontSize: 10.5, lineHeight: 1.45, background: '#f5fafb' }}
+    >
+      Educational information only · Not a substitute for professional medical advice, diagnosis, treatment, medication advice or crisis support · Powered by{' '}
+      <a
+        href="https://www.neurascalex.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{ color: '#1f5f64', fontWeight: 700, textDecoration: 'none' }}
+      >
+        NeuraScaleX
+      </a>
     </div>
   );
 }

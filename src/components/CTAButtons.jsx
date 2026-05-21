@@ -31,19 +31,33 @@ export function CTAButtons({
 
   return (
     <div
-      className="flex gap-[10px] overflow-x-auto px-4 py-2 border-t border-[#E2E8F0]"
-      style={{ scrollbarWidth: 'none' }}
+      style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: 10,
+        padding: '16px 18px 4px',
+        scrollbarWidth: 'none',
+      }}
     >
       {actions.map((action, idx) => (
         <a
           key={idx}
-          className="flex-none text-center border-2 rounded-full px-[14px] py-[6px] text-[12px] font-semibold transition-all cursor-pointer bg-white"
           style={{
-            minWidth: '130px',
-            borderColor: colour,
-            color: colour,
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: 999,
+            padding: '12px 16px',
+            fontSize: 13,
+            fontWeight: 950,
+            border: '2px solid transparent',
+            minHeight: 44,
+            cursor: 'pointer',
             textDecoration: 'none',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.06)'
+            ...(idx === 0
+              ? { background: '#1f5f64', color: '#fff', boxShadow: '0 12px 24px rgba(31,95,100,.18)', border: '2px solid transparent' }
+              : { background: '#fff', color: '#1f5f64', borderColor: '#2d7d83' }
+            ),
           }}
           href={action.url || '#'}
           target={action.url && action.url.startsWith('http') ? '_blank' : undefined}
