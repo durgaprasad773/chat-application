@@ -20,7 +20,7 @@ import {
 } from '../services/chatApi';
 import { truncateText, getHeaderMaxLength } from '../utils/helpers';
 
-export function ChatbotFullPage({ config = {} }) {
+export function ChatbotFullPage({ config = {}, onProfileImageLoaded }) {
   // State
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -119,6 +119,11 @@ export function ChatbotFullPage({ config = {} }) {
         brandColour: settings.BrandColour || '#667eea',
         textColour: settings.TextColour || '#ffffff'
       }));
+
+      // Notify parent of the loaded profile image
+      if (onProfileImageLoaded && settings.LogoUrl) {
+        onProfileImageLoaded(settings.LogoUrl);
+      }
 
       // Fetch starter questions
       const questions = await getStarterQuestions(id);

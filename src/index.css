@@ -233,6 +233,19 @@
   text-align: center;
   padding: 22px 0 20px;
 }
+.ask-brand-logo-heading {
+  font-family:  Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 38px;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  color: #000000;
+  margin: 0 0 14px;
+  line-height: 1;
+}
+.ask-brand-ask {
+  font-weight: 800;
+  color: #000000;
+}
 .ask-expert-identity {
   display: grid;
   justify-items: center;

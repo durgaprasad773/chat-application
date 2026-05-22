@@ -3,6 +3,8 @@ import { ChatbotFullPage } from './components/ChatbotFullPage';
 import './index.css';
 
 function App() {
+  const [expertImageUrl, setExpertImageUrl] = React.useState('/logo.png');
+
   const scrollToChat = () => {
     const el = document.getElementById('chat-widget');
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -63,17 +65,20 @@ function App() {
 
           {/* Hero */}
           <header className="ask-hero">
+            <div className="ask-brand-logo-heading">
+              <span className="ask-brand-ask">ask</span> deepak
+            </div>
             <div className="ask-expert-identity">
               <div className="ask-expert-photo">
                 <img
-                  src="/logo.png"
-                  alt="Dr Deepak Ravindran"
+                  src={expertImageUrl}
+                  alt="Prof. Dr. Deepak Ravindran"
                   onError={(e) => {
                     e.target.style.display = 'none';
                   }}
                 />
               </div>
-              <h1 className="ask-expert-name">Dr Deepak Ravindran</h1>
+              <h1 className="ask-expert-name">Prof. Dr. Deepak Ravindran</h1>
               <p className="ask-expert-subtitle">Consultant in Pain Medicine · Berkshire Pain Clinic</p>
               <div className="ask-credential-strip">
                 <span>20+ years experience</span>
@@ -95,7 +100,7 @@ function App() {
 
           {/* Chat Widget */}
           <section id="chat-widget" style={{ margin: '24px 0 18px' }}>
-            <ChatbotFullPage />
+            <ChatbotFullPage onProfileImageLoaded={(url) => { if (url) setExpertImageUrl(url); }} />
           </section>
 
           {/* Why Ask Deepak exists */}
