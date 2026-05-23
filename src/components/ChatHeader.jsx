@@ -35,9 +35,6 @@ export function ChatHeader({
           <div className="text-[12px] font-extrabold" style={{ color: '#22a569', fontWeight: 850, marginTop: 2 }}>● Online now</div>
         </div>
       </div>
-      <div className="text-right text-[11px] leading-snug" style={{ color: '#7a8898', fontWeight: 760 }}>
-        Educational only<br />Not medical advice
-      </div>
     </div>
   );
 }
