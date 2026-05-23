@@ -71,7 +71,7 @@ function App() {
             <div className="ask-expert-identity">
               <div className="ask-expert-photo">
                 <img
-                  src={expertImageUrl}
+                  src="/deepak_logo.png"
                   alt="Prof. Dr. Deepak Ravindran"
                   onError={(e) => {
                     e.target.style.display = 'none';
