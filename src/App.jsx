@@ -53,7 +53,6 @@ function App() {
     { href: 'https://deepakravindran.co.uk/', label: 'Website' },
     { href: 'https://www.linkedin.com/in/deepak-ravindran-b225a61a/', label: 'LinkedIn' },
     { href: 'https://www.youtube.com/@drdeepakravindran5361', label: 'YouTube' },
-    { href: 'https://twitter.com/BerksPainClinic', label: 'X / Twitter' },
     { href: 'https://www.instagram.com/drdeepakravindran/', label: 'Instagram' },
     { href: 'https://www.facebook.com/BerkshirePainClinic/', label: 'Facebook' },
   ];
