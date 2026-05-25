@@ -31,6 +31,7 @@ export function ChatbotFullPage({ config = {}, onProfileImageLoaded }) {
   const [sessionTracked, setSessionTracked] = useState(false);
   const [doctorDetails, setDoctorDetails] = useState(null);
   const [showEmailForm, setShowEmailForm] = useState(false);
+  const [bookNowClicksId, setBookNowClicksId] = useState(null);
   const [headerMaxLength, setHeaderMaxLength] = useState(getHeaderMaxLength());
   const [starterQuestions, setStarterQuestions] = useState(null);
   
@@ -364,7 +365,8 @@ export function ChatbotFullPage({ config = {}, onProfileImageLoaded }) {
   const handleBookNow = async () => {
     if (userChatSessionId) {
       try {
-        await trackButtonClick(userChatSessionId, chatConfig.bookNowText, chatbotId);
+        const clickId = await trackButtonClick(userChatSessionId, chatConfig.bookNowText, chatbotId);
+        if (clickId) setBookNowClicksId(clickId);
       } catch (error) {
         console.error('Failed to track Book Now click:', error);
       }
@@ -514,6 +516,7 @@ export function ChatbotFullPage({ config = {}, onProfileImageLoaded }) {
         onClose={() => setShowEmailForm(false)}
         chatbotId={chatbotId}
         brandColour={chatConfig.brandColour}
+        bookNowClicksId={bookNowClicksId}
       />
     </div>
   );

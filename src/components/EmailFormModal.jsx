@@ -6,7 +6,8 @@ export function EmailFormModal({
   isOpen,
   onClose,
   chatbotId,
-  brandColour
+  brandColour,
+  bookNowClicksId
 }) {
   const [formData, setFormData] = useState({
     name: '',
@@ -34,7 +35,7 @@ export function EmailFormModal({
     setIsLoading(true);
 
     try {
-      await sendEmail(formData.name, formData.email, formData.message, chatbotId);
+      await sendEmail(formData.name, formData.email, formData.message, chatbotId, bookNowClicksId);
       setShowSuccess(true);
       setTimeout(() => {
         onClose();

@@ -109,12 +109,13 @@ export async function saveReaction(sessionId, messageId, reaction, chatbotId = n
 }
 
 // Send email
-export async function sendEmail(name, email, message, chatbotId = null) {
+export async function sendEmail(name, email, message, chatbotId = null, bookNowClicksId = null) {
   try {
     const requestPayload = {
       Name: name,
       ContactPersonEmail: email,
-      Message: message
+      Message: message,
+      BookNowClicksId: bookNowClicksId || ''
     };
 
     const headers = {
@@ -352,7 +353,7 @@ export async function trackButtonClick(userChatSessionId, buttonLabel, chatbotId
 
     const data = await response.text();
     console.log('Button click tracked:', buttonLabel, data);
-    return data;
+    return data.trim();
   } catch (error) {
     console.error('Error tracking button click:', error);
     throw new Error('Failed to track button click.');
