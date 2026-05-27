@@ -380,14 +380,24 @@ export function ChatbotFullPage({ config = {}, onProfileImageLoaded }) {
   };
 
   const handleSendEmail = async () => {
-    if (userChatSessionId) {
+    let sid = userChatSessionId;
+    if (!sid && userIP && chatbotId) {
       try {
-        await trackButtonClick(userChatSessionId, chatConfig.sendEmailText, chatbotId);
+        sid = await insertUserChatSession(userIP, chatbotId);
+        setUserChatSessionId(sid);
+        setSessionTracked(true);
+      } catch (error) {
+        console.error('Failed to create session:', error);
+      }
+    }
+    if (sid && chatConfig.sendEmailText) {
+      try {
+        const clickId = await trackButtonClick(sid, chatConfig.sendEmailText, chatbotId);
+        if (clickId) setBookNowClicksId(clickId.trim());
       } catch (error) {
         console.error('Failed to track Send Email click:', error);
       }
     }
-
     setShowEmailForm(true);
   };
 
