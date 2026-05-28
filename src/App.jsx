@@ -65,7 +65,7 @@ function App() {
           {/* Hero */}
           <header className="ask-hero">
             <div className="ask-brand-logo-heading">
-              <span className="ask-brand-ask">ask</span> deepak
+              <img src="/ask_deepak_logo.png" alt="ask deepak" className="ask-brand-logo-img" />
             </div>
             <div className="ask-expert-identity">
               <div className="ask-expert-photo">
