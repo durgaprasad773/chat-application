@@ -10,6 +10,7 @@ export {
   getStarterQuestions,
   getDoctorDetails,
   fetchUserIP,
+  getWidgetRegistration,
   insertUserChatSession,
   trackButtonClick
 } from './chatApi';

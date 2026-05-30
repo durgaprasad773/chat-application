@@ -15,6 +15,7 @@ import {
   getStarterQuestions,
   getDoctorDetails,
   fetchUserIP,
+  getWidgetRegistration,
   insertUserChatSession,
   trackButtonClick,
 } from '../services/chatApi';
@@ -27,6 +28,7 @@ export function ChatbotFullPage({ config = {}, onProfileImageLoaded }) {
   const [showStarterQuestions, setShowStarterQuestions] = useState(true);
   const [chatbotId, setChatbotId] = useState(null);
   const [userIP, setUserIP] = useState('127.0.0.1');
+  const [widgetWebUrlId, setWidgetWebUrlId] = useState(null);
   const [userChatSessionId, setUserChatSessionId] = useState(null);
   const [sessionTracked, setSessionTracked] = useState(false);
   const [doctorDetails, setDoctorDetails] = useState(null);
@@ -92,6 +94,13 @@ export function ChatbotFullPage({ config = {}, onProfileImageLoaded }) {
       // Fetch IP
       const ip = await fetchUserIP();
       setUserIP(ip);
+
+      // Fetch widget registration to get WidgetWebUrlId
+      const webUrl = window.location.href;
+      const registration = await getWidgetRegistration(webUrl);
+      if (registration?.WidgetWebUrlId) {
+        setWidgetWebUrlId(registration.WidgetWebUrlId);
+      }
 
       // Fetch doctor details
       const details = await getDoctorDetails(id);
@@ -164,7 +173,7 @@ export function ChatbotFullPage({ config = {}, onProfileImageLoaded }) {
   const trackSession = async () => {
     if (userIP && chatbotId && !sessionTracked) {
       try {
-        const sessionId = await insertUserChatSession(userIP, chatbotId);
+        const sessionId = await insertUserChatSession(userIP, chatbotId, widgetWebUrlId);
         setUserChatSessionId(sessionId);
         setSessionTracked(true);
         console.log('Session tracked:', sessionId);
@@ -207,7 +216,7 @@ export function ChatbotFullPage({ config = {}, onProfileImageLoaded }) {
     let sessionId = userChatSessionId;
     if (!userChatSessionId && userIP && chatbotId) {
       try {
-        sessionId = await insertUserChatSession(userIP, chatbotId);
+        sessionId = await insertUserChatSession(userIP, chatbotId, widgetWebUrlId);
         setUserChatSessionId(sessionId);
         setSessionTracked(true);
         console.log('Session created on first message:', sessionId);
@@ -273,7 +282,7 @@ export function ChatbotFullPage({ config = {}, onProfileImageLoaded }) {
     let sessionId = userChatSessionId;
     if (!userChatSessionId && userIP && chatbotId) {
       try {
-        sessionId = await insertUserChatSession(userIP, chatbotId);
+        sessionId = await insertUserChatSession(userIP, chatbotId, widgetWebUrlId);
         setUserChatSessionId(sessionId);
         setSessionTracked(true);
         console.log('Session created on first message:', sessionId);
@@ -383,7 +392,7 @@ export function ChatbotFullPage({ config = {}, onProfileImageLoaded }) {
     let sid = userChatSessionId;
     if (!sid && userIP && chatbotId) {
       try {
-        sid = await insertUserChatSession(userIP, chatbotId);
+        sid = await insertUserChatSession(userIP, chatbotId, widgetWebUrlId);
         setUserChatSessionId(sid);
         setSessionTracked(true);
       } catch (error) {
