@@ -78,7 +78,6 @@ function App() {
                 />
               </div>
               <h1 className="ask-expert-name">Prof. Dr. Deepak Ravindran</h1>
-              <p className="ask-expert-subtitle">Consultant in Pain Medicine · Berkshire Pain Clinic</p>
               <div className="ask-credential-strip">
                 <span>20+ years experience</span>
                 <span>The UK's Go-To Doctor in Pain Management</span>
