@@ -19,7 +19,15 @@ import {
   insertUserChatSession,
   trackButtonClick,
 } from '../services/chatApi';
-import { truncateText, getHeaderMaxLength } from '../utils/helpers';
+import {
+  truncateText,
+  getHeaderMaxLength,
+  nsxTrack,
+  getQuestionIntent,
+  isBookingUrl,
+  decorateBookingUrl,
+  trackLeadCaptured,
+} from '../utils/helpers';
 
 export function ChatbotFullPage({ config = {}, onProfileImageLoaded }) {
   // State
@@ -62,6 +70,8 @@ export function ChatbotFullPage({ config = {}, onProfileImageLoaded }) {
   });
 
   const messagesEndRef = useRef(null);
+  // Topic of the latest question, used for utm_content=chat_<topic> on booking links
+  const topicRef = useRef('general');
 
   // Initialize chatbot
   useEffect(() => {
@@ -212,6 +222,10 @@ export function ChatbotFullPage({ config = {}, onProfileImageLoaded }) {
 
     setShowStarterQuestions(false);
 
+    const intent = getQuestionIntent(message);
+    topicRef.current = intent;
+    nsxTrack('question_asked', { question_intent: intent });
+
     // Create session on first message if not already created
     let sessionId = userChatSessionId;
     if (!userChatSessionId && userIP && chatbotId) {
@@ -255,7 +269,8 @@ export function ChatbotFullPage({ config = {}, onProfileImageLoaded }) {
         followUpQuestion: response.follow_up_question,
         suggestedTopics: response.suggested_topics,
         hasActionButton: response.has_action_button,
-        actionButtons: response.action_buttons || []
+        actionButtons: response.action_buttons || [],
+        topic: intent
       };
 
       setMessages(prev => [...prev, botMessage]);
@@ -277,6 +292,10 @@ export function ChatbotFullPage({ config = {}, onProfileImageLoaded }) {
     if (isLoading) return;
 
     setShowStarterQuestions(false);
+
+    const intent = getQuestionIntent(questionText);
+    topicRef.current = intent;
+    nsxTrack('question_asked', { question_intent: intent });
 
     // Create session on first message if not already created
     let sessionId = userChatSessionId;
@@ -311,7 +330,8 @@ export function ChatbotFullPage({ config = {}, onProfileImageLoaded }) {
         followUpQuestion: null,
         suggestedTopics: null,
         hasActionButton: !!(actionUrl && actionLabel),
-        actionButtons: (actionUrl && actionLabel) ? [{ [actionLabel]: actionUrl }] : []
+        actionButtons: (actionUrl && actionLabel) ? [{ [actionLabel]: actionUrl }] : [],
+        topic: intent
       };
 
       setMessages(prev => [...prev, botMessage]);
@@ -337,7 +357,8 @@ export function ChatbotFullPage({ config = {}, onProfileImageLoaded }) {
         session_id: response.session_id || userChatSessionId,
         userReaction: null,
         followUpQuestion: response.follow_up_question,
-        suggestedTopics: response.suggested_topics
+        suggestedTopics: response.suggested_topics,
+        topic: intent
       };
 
       setMessages(prev => [...prev, botMessage]);
@@ -382,7 +403,8 @@ export function ChatbotFullPage({ config = {}, onProfileImageLoaded }) {
     }
 
     if (chatConfig.bookNowUrl) {
-      window.open(chatConfig.bookNowUrl, '_blank');
+      trackLeadCaptured();
+      window.open(decorateBookingUrl(chatConfig.bookNowUrl, topicRef.current, true), '_blank');
     } else {
       alert('Book Now: Please call us at your clinic number or visit our website to book an appointment.');
     }
@@ -420,7 +442,8 @@ export function ChatbotFullPage({ config = {}, onProfileImageLoaded }) {
     }
 
     if (chatConfig.ctaTwoUrl) {
-      window.open(chatConfig.ctaTwoUrl, '_blank');
+      if (isBookingUrl(chatConfig.ctaTwoUrl)) trackLeadCaptured();
+      window.open(decorateBookingUrl(chatConfig.ctaTwoUrl, topicRef.current), '_blank');
     } else {
       alert(`${chatConfig.ctaTwoText}: Please contact us for more information.`);
     }
@@ -436,7 +459,8 @@ export function ChatbotFullPage({ config = {}, onProfileImageLoaded }) {
     }
 
     if (chatConfig.ctaThreeUrl) {
-      window.open(chatConfig.ctaThreeUrl, '_blank');
+      if (isBookingUrl(chatConfig.ctaThreeUrl)) trackLeadCaptured();
+      window.open(decorateBookingUrl(chatConfig.ctaThreeUrl, topicRef.current), '_blank');
     } else {
       alert(`${chatConfig.ctaThreeText}: Please contact us for more information.`);
     }
@@ -454,7 +478,7 @@ export function ChatbotFullPage({ config = {}, onProfileImageLoaded }) {
   const latestBotMessageIndex = getLatestBotMessageIndex();
 
   return (
-    <div className="w-full bg-white rounded-[28px] border border-[#dce8ee] overflow-hidden" style={{ boxShadow: '0 10px 28px rgba(18,45,60,.07)' }}>
+    <div className="w-full bg-white overflow-hidden" style={{ border: '1px solid #e3e9ee', borderRadius: 16 }}>
       {/* Header */}
       <ChatHeader
         clinicName={truncateText(chatConfig.clinicName, headerMaxLength)}
@@ -465,7 +489,7 @@ export function ChatbotFullPage({ config = {}, onProfileImageLoaded }) {
       />
 
       {/* Messages Area */}
-      <div className="overflow-y-auto px-[18px] py-[18px]" style={{ minHeight: '400px', maxHeight: '500px', background: 'linear-gradient(180deg, #fbfefe, #f5fafb)' }}>
+      <div className="overflow-y-auto px-[18px] py-[18px]" style={{ minHeight: '400px', maxHeight: '500px', background: '#f8fbfd' }}>
         {messages.map((message, index) => (
           <Message
             key={message.id}

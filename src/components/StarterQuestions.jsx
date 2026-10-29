@@ -23,10 +23,10 @@ export function StarterQuestions({
       <div
         style={{
           margin: '16px 0 10px',
-          color: '#7a8898',
+          color: '#4f6474',
           textAlign: 'right',
-          fontSize: 12,
-          fontWeight: 850,
+          fontSize: 13,
+          fontWeight: 600,
         }}
       >
         Choose a topic to get started:
@@ -35,7 +35,7 @@ export function StarterQuestions({
         {questionsList.map((item, i) => (
           <motion.button
             key={i}
-            whileHover={{ backgroundColor: '#f5fafb' }}
+            whileHover={{ borderColor: '#075a85' }}
             whileTap={{ scale: 0.98 }}
             onClick={() => onSelectQuestion(item.q, item.a, item.url, item.buttonLabel)}
             disabled={isLoading}
@@ -43,15 +43,14 @@ export function StarterQuestions({
               width: '92%',
               marginLeft: 'auto',
               display: 'block',
-              background: '#fff',
-              border: '1px solid #dce8ee',
-              borderRadius: 16,
-              padding: '13px 15px',
-              textAlign: 'center',
-              fontSize: 14,
-              fontWeight: 900,
-              color: '#23374a',
-              boxShadow: '0 8px 22px rgba(18,45,60,.05)',
+              background: '#f8fbfd',
+              border: '1px solid #e3e9ee',
+              borderRadius: 12,
+              padding: '13px 16px',
+              textAlign: 'left',
+              fontSize: 16,
+              fontWeight: 600,
+              color: '#13293a',
               cursor: isLoading ? 'not-allowed' : 'pointer',
               opacity: isLoading ? 0.5 : 1,
             }}

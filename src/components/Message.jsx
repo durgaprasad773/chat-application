@@ -1,5 +1,12 @@
 import React from 'react';
-import { parseMarkdown, formatTime } from '../utils/helpers';
+import {
+  parseMarkdown,
+  formatTime,
+  isBookingUrl,
+  decorateBookingUrl,
+  decorateBookingLinksInHtml,
+  trackLeadCaptured,
+} from '../utils/helpers';
 import { Button } from "@/components/ui/button";
 
 export function Message({
@@ -13,6 +20,18 @@ export function Message({
   clinicName
 }) {
   const isUser = message.sender === 'user';
+  const topic = message.topic || 'general';
+
+  const openActionUrl = (url) => {
+    if (isBookingUrl(url)) trackLeadCaptured();
+    window.open(decorateBookingUrl(url, topic), '_blank', 'noopener,noreferrer');
+  };
+
+  // Links inside the answer text: record the booking route when one is followed
+  const handleBodyClick = (e) => {
+    const link = e.target.closest && e.target.closest('a');
+    if (link && isBookingUrl(link.href)) trackLeadCaptured();
+  };
 
   return (
     <div className={`flex flex-col mb-2.5 ${isUser ? 'items-end' : 'items-start'}`}>
@@ -26,16 +45,16 @@ export function Message({
                 className="w-full h-full object-cover"
                 onError={(e) => {
                   e.target.style.display = 'none';
-                  e.target.parentElement.innerHTML = '<div class="w-full h-full rounded-full bg-gradient-to-br from-[#005B9A] to-[#0891B2] flex items-center justify-center"><span class="text-[8px] text-white font-bold">AI</span></div>';
+                  e.target.parentElement.innerHTML = '<div class="w-full h-full rounded-full bg-[#075a85] flex items-center justify-center"><span class="text-[8px] text-white font-bold">AI</span></div>';
                 }}
               />
             </div>
           ) : (
-            <div className="w-[18px] h-[18px] rounded-full bg-gradient-to-br from-[#005B9A] to-[#0891B2] flex items-center justify-center">
+            <div className="w-[18px] h-[18px] rounded-full bg-[#075a85] flex items-center justify-center">
               <span className="text-[8px] text-white font-bold">AI</span>
             </div>
           )}
-          <span className="text-[10px] text-[#94A3B8] font-medium">{clinicName || 'AI Assistant'}</span>
+          <span className="text-[10px] text-[#4f6474] font-medium">{clinicName || 'AI Assistant'}</span>
         </div>
       )}
       
@@ -45,26 +64,27 @@ export function Message({
           maxWidth: '88%',
           wordBreak: 'break-words',
           borderRadius: '14px 4px 14px 14px',
-          background: '#1f5f64',
+          background: '#075a85',
           color: '#fff',
-          boxShadow: '0 2px 10px rgba(31,95,100,.22)',
+          boxShadow: '0 2px 10px rgba(7,90,133,.22)',
         } : {
           padding: '16px',
           maxWidth: '88%',
           wordBreak: 'break-words',
           background: '#fff',
-          border: '1px solid #dce8ee',
-          borderRadius: '18px',
-          borderTopLeftRadius: '8px',
-          boxShadow: '0 8px 22px rgba(18,45,60,.06)',
-          color: '#213244',
-          fontSize: 15,
-          lineHeight: 1.62,
+          border: '1px solid #e3e9ee',
+          borderRadius: '16px',
+          borderTopLeftRadius: '6px',
+          boxShadow: '0 4px 14px rgba(19,41,58,.06)',
+          color: '#13293a',
+          fontSize: 16,
+          lineHeight: 1.6,
         }}
       >
         <div
           className="leading-relaxed"
-          dangerouslySetInnerHTML={{ __html: parseMarkdown(message.text) }}
+          onClick={handleBodyClick}
+          dangerouslySetInnerHTML={{ __html: decorateBookingLinksInHtml(parseMarkdown(message.text), topic) }}
         />
         
         {/* Action Buttons from API response */}
@@ -77,8 +97,8 @@ export function Message({
                 <Button
                   key={idx}
                   variant="outline"
-                  className="rounded-full border-[#1f5f64] text-[#1f5f64] hover:bg-[#eaf5f7] px-4 text-xs font-medium"
-                  onClick={() => window.open(url, '_blank', 'noopener,noreferrer')}
+                  className="rounded-full border-[#075a85] text-[#075a85] hover:bg-[#eaf3f8] px-4 text-xs font-semibold"
+                  onClick={() => openActionUrl(url)}
                 >
                   {label}
                 </Button>

@@ -9,8 +9,8 @@ export function ChatHeader({
 }) {
   return (
     <div
-      className="flex justify-between items-center gap-[14px] px-[18px] py-[16px] border-b border-[#dce8ee]"
-      style={{ background: 'linear-gradient(180deg, #fff, #f8fbfb)' }}
+      className="flex justify-between items-center gap-[14px] px-[18px] py-[16px] border-b border-[#e3e9ee]"
+      style={{ background: '#fff' }}
     >
       <div className="flex items-center gap-3">
         <div
@@ -25,14 +25,14 @@ export function ChatHeader({
               onError={(e) => { e.target.style.display = 'none'; }}
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center bg-[#1f5f64]">
+            <div className="w-full h-full flex items-center justify-center bg-[#075a85]">
               <span className="text-[13px] text-white font-bold">AI</span>
             </div>
           )}
         </div>
         <div>
-          <div className="text-[16px] font-black text-[#163447]" style={{ fontWeight: 950 }}>{clinicName}</div>
-          <div className="text-[12px] font-extrabold" style={{ color: '#22a569', fontWeight: 850, marginTop: 2 }}>● Online now</div>
+          <div className="text-[18px] text-[#05405f]" style={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 600, lineHeight: 1.2 }}>{clinicName}</div>
+          <div className="text-[13px]" style={{ color: '#1e8e5a', fontWeight: 600, marginTop: 2 }}>● Online now</div>
         </div>
       </div>
     </div>

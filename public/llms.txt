@@ -1,0 +1,31 @@
+# Ask Deepak
+
+> Educational answers about persistent (chronic) pain from Prof Dr Deepak Ravindran, UK consultant in pain and lifestyle medicine (GMC 6080958), Honorary Professor at Teesside University, founder of the Berkshire Pain Clinic in Reading and author of The Pain-Free Mindset (Vermilion, 2021). Patients can book a free discovery call with his team.
+
+## Key pages
+- [Ask Deepak home and FAQs](https://askdeepak.neurascalex.com/): 27 answers built from real patient questions
+- [Which sounds most like you?](https://askdeepak.neurascalex.com/#find): routes a visitor to the section matching their situation
+- [Ask a question in your own words](https://askdeepak.neurascalex.com/#ask): the Ask Deepak assistant
+- [Back or neck pain with a clear scan](https://askdeepak.neurascalex.com/#back-neck-pain): why pain persists after tissues have healed, and pain as a protective system
+- [Fibromyalgia and widespread pain](https://askdeepak.neurascalex.com/#fibromyalgia): diagnosis, being taken seriously, what helps
+- [Nerve pain, sciatica and CRPS](https://askdeepak.neurascalex.com/#nerve-pain): burning, shooting and electric pain explained
+- [Pain and fatigue after a virus or COVID](https://askdeepak.neurascalex.com/#post-viral): pacing, energy limits, recovery
+- [When painkillers stop working](https://askdeepak.neurascalex.com/#painkillers): opioid tapering, what NICE NG193 recommends instead
+- [Several diagnoses that may be connected](https://askdeepak.neurascalex.com/#connected): overlapping conditions and central sensitisation
+- [Dr Deepak's approach](https://askdeepak.neurascalex.com/#why): the Upstream approach, medication, sleep, lifestyle medicine
+- [For carers and family](https://askdeepak.neurascalex.com/#carers): supporting someone living with chronic pain
+- [For referring clinicians](https://askdeepak.neurascalex.com/#referrers): when to refer to pain and lifestyle medicine
+- [Fees, insurance and common questions](https://askdeepak.neurascalex.com/#faq): costs, self-pay, insurers, what a first appointment involves
+- [Book a free discovery call](https://go.berkshirepainclinic.co.uk/apply-)
+- [Fees and insurance](https://www.berkshirepainclinic.co.uk/fees-pain-specialist-reading-berkshire/)
+- [Dr Deepak's website](https://deepakravindran.co.uk/)
+
+## Evidence referenced on this page
+- [NICE NG193: Chronic pain (primary and secondary) in over 16s](https://www.nice.org.uk/guidance/ng193)
+- [NICE NG206: ME/CFS diagnosis and management](https://www.nice.org.uk/guidance/ng206)
+- [Fayaz et al. Prevalence of chronic pain in the UK. BMJ Open 2016;6:e010364](https://bmjopen.bmj.com/content/6/6/e010364)
+
+## Notes
+- Content is educational only and does not replace medical advice, diagnosis or treatment.
+- Ask Deepak cannot diagnose, prescribe or triage. Urgent or emergency symptoms should go to NHS 111 or 999.
+- Reviewed by Prof Dr Deepak Ravindran (GMC 6080958). Last reviewed 2026-10-27.

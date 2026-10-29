@@ -64,6 +64,65 @@ export function formatTime(timestamp) {
   return timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 }
 
+// ---------------------------------------------------------------------------
+// NeuraScaleX tracking + booking attribution
+// window.nsxTrack is provided by /nsx-attribution.js and only sends once consent is given.
+// ---------------------------------------------------------------------------
+const BOOKING_HOST = 'go.berkshirepainclinic.co.uk';
+
+export function nsxTrack(name, params) {
+  if (typeof window !== 'undefined' && window.nsxTrack) window.nsxTrack(name, params);
+}
+
+// Coarse topic label only. The visitor's actual text is never sent to analytics.
+export function getQuestionIntent(text) {
+  const t = (text || '').toLowerCase();
+  if (/insur|\bcost|\bfees?\b|price|self-?pay|how much|bupa|axa|aviva|vitality/.test(t)) return 'insurance';
+  if (/fibro/.test(t)) return 'fibromyalgia';
+  if (/nerve|sciatic|crps|neuropath|regional pain|burning|shooting|pins and needles/.test(t)) return 'nerve-pain';
+  if (/covid|post-?viral|viral|\bme\/cfs|fatigue/.test(t)) return 'post-viral';
+  if (/painkill|medicat|opioid|tablet|gabapentin|pregabalin|codeine|morphine|tramadol/.test(t)) return 'painkillers';
+  if (/back|neck|spine|spinal|\bmri\b|scan|disc\b/.test(t)) return 'back-neck-pain';
+  if (/book|appointment|discovery call|consultation|see dr|see deepak/.test(t)) return 'booking';
+  return 'general';
+}
+
+export function isBookingUrl(url) {
+  try {
+    return new URL(url, window.location.href).hostname.indexOf(BOOKING_HOST) !== -1;
+  } catch (e) {
+    return false;
+  }
+}
+
+// Booking links the chat generates must carry utm_content=chat_<topic> so chat bookings
+// can be told apart from page-button bookings. `force` is for the configured Book Now CTA.
+export function decorateBookingUrl(url, topic, force = false) {
+  if (!url) return url;
+  try {
+    const u = new URL(url, window.location.href);
+    if (!force && u.hostname.indexOf(BOOKING_HOST) === -1) return url;
+    u.searchParams.set('utm_content', `chat_${topic || 'general'}`);
+    return u.toString();
+  } catch (e) {
+    return url;
+  }
+}
+
+// Same decoration for links inside rendered markdown (hrefs are HTML-escaped there).
+export function decorateBookingLinksInHtml(html, topic) {
+  if (typeof html !== 'string') return html;
+  return html.replace(/href="([^"]+)"/g, (match, href) => {
+    const raw = href.replace(/&amp;/g, '&');
+    const decorated = decorateBookingUrl(raw, topic);
+    return decorated === raw ? match : `href="${decorated.replace(/&/g, '&amp;')}"`;
+  });
+}
+
+export function trackLeadCaptured() {
+  nsxTrack('lead_captured', { route: 'book_discovery_call' });
+}
+
 // Truncate text
 export function truncateText(text, maxLength = 14) {
   if (!text) return '';

@@ -47,16 +47,16 @@ export function CTAButtons({
             alignItems: 'center',
             justifyContent: 'center',
             borderRadius: 999,
-            padding: '12px 16px',
-            fontSize: 13,
-            fontWeight: 950,
+            padding: '12px 20px',
+            fontSize: 15,
+            fontWeight: 700,
             border: '2px solid transparent',
             minHeight: 44,
             cursor: 'pointer',
             textDecoration: 'none',
             ...(idx === 0
-              ? { background: '#1f5f64', color: '#fff', boxShadow: '0 12px 24px rgba(31,95,100,.18)', border: '2px solid transparent' }
-              : { background: '#fff', color: '#1f5f64', borderColor: '#2d7d83' }
+              ? { background: '#e9f27d', color: '#05405f', border: '2px solid #e9f27d' }
+              : { background: '#fff', color: '#075a85', borderColor: '#075a85' }
             ),
           }}
           href={action.url || '#'}
