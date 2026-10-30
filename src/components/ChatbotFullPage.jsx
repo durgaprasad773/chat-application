@@ -89,8 +89,11 @@ export function ChatbotFullPage({ config = {}, onProfileImageLoaded }) {
   }, []);
 
   // Scroll to bottom when messages change
+  // Skip until the user has sent a message, so the page doesn't jump to the chat on load
   useEffect(() => {
-    scrollToBottom();
+    if (messages.some(m => m.sender === 'user')) {
+      scrollToBottom();
+    }
   }, [messages, isLoading]);
 
   // Session will be created on first message send, not on page load
