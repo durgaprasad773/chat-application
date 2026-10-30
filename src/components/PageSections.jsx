@@ -115,13 +115,13 @@ export function AskSection({ children }) {
           you're ready, the assistant can take you straight to a free discovery call.
         </p>
         <div className="ask">
+          <div id="askdeepak-chat" data-clarity-mask="true">
+            {children}
+          </div>
           <div className="starters">
             {ASK_STARTERS.map((s) => (
               <a key={s.href} href={s.href}>{s.text}</a>
             ))}
-          </div>
-          <div id="askdeepak-chat" data-clarity-mask="true">
-            {children}
           </div>
           <p className="small">
             Educational information only. Ask Deepak cannot diagnose, prescribe or replace a consultation. In an
