@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
-    "build": "vite build",
+    "build": "vite build && node prerender.cjs",
     "preview": "vite preview",
     "lint": "eslint src"
   },
@@ -27,6 +27,7 @@
   "devDependencies": {
     "@vitejs/plugin-react": "^5.0.4",
     "autoprefixer": "^10.4.21",
+    "playwright": "^1.65.0",
     "postcss": "^8.4.32",
     "tailwindcss": "^4.1.14",
     "vite": "^6.2.0"
